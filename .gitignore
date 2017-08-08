@@ -1,0 +1,17 @@
+# Dependencies
+node_modules
+
+# Testing
+coverage
+
+# Production
+build
+
+# Database data
+postgres_data
+
+# Misc
+.env
+.DS_Store
+*.sw*
+*.log*

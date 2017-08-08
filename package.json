@@ -1,0 +1,58 @@
+{
+  "name": "lovvedit",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "private": true,
+  "scripts": {
+    "start": "node build/server.js",
+    "start:dev": "nodemon src/server.js --exec babel-node",
+    "prebuild": "npm run clean",
+    "build": "babel src -d build",
+    "test": "jest",
+    "precommit": "lint-staged",
+    "clean": "rimraf build"
+  },
+  "repository": "git@github.com:lovvedit/lovvedit.git",
+  "author": "Diego Stratta <strattadb@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.2.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-dynamic-import-node": "^1.0.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "eslint": "^4.4.1",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-prettier": "^2.1.2",
+    "husky": "^0.14.3",
+    "jest": "^20.0.4",
+    "lint-staged": "^4.0.3",
+    "nodemon": "^1.11.0",
+    "prettier": "^1.5.3",
+    "prettier-eslint": "^6.4.2",
+    "prettier-eslint-cli": "^4.1.1",
+    "rimraf": "^2.6.1"
+  },
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "graphql": "^0.10.5",
+    "graphql-server-koa": "^1.0.5",
+    "kcors": "^2.2.1",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^3.0.1",
+    "koa-router": "^7.2.1",
+    "pg": "^7.1.0",
+    "sequelize": "^4.4.2",
+    "spdy": "^3.4.7",
+    "winston": "^2.3.1"
+  },
+  "lint-staged": {
+    "*.js": ["prettier-eslint --write", "git add"]
+  }
+}

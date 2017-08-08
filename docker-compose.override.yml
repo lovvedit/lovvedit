@@ -1,0 +1,13 @@
+version: '3'
+services:
+  node:
+    command: sleep 5000
+    #command: yarn run start:dev
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - .env
+
+  postgres:
+    env_file:
+      - .env
