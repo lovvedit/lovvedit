@@ -8,7 +8,7 @@ coverage
 build
 
 # Database data
-postgres_data
+mongo_data
 
 # Misc
 .env

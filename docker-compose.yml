@@ -13,10 +13,10 @@ services:
   node:
     build: .
     depends_on:
-      - postgres
+      - mongo
 
   # The main database
-  postgres:
-    image: postgres:9.6.3
+  mongo:
+    image: mongo:3.5.11
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - ./mongo_data:/data/db

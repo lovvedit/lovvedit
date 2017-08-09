@@ -13,6 +13,7 @@ import koaLogger from 'koa-logger';
 
 import router from './router';
 
+import './config/mongoose';
 import logger from './config/winston';
 
 const NODE_ENV = process.env.NODE_ENV;
@@ -20,7 +21,6 @@ const PORT = process.env.PORT;
 
 const app = new Koa();
 
-// Plug in the middleware
 app
   .use(koaLogger())
   .use(bodyParser())
