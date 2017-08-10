@@ -42,7 +42,7 @@
   "dependencies": {
     "bcrypt": "^1.0.2",
     "graphql": "^0.10.5",
-    "graphql-server-koa": "^1.0.5",
+    "graphql-server-koa": "^1.1.0",
     "kcors": "^2.2.1",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",

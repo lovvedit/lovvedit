@@ -2,7 +2,8 @@
 
 > Media recommendation website
 
-[![David](https://david-dm.org/rndevoo/gateway.svg)](https://david-dm.org/rndevoo/gateway)
+[![Dependencies](https://david-dm.org/lovvedit/lovvedit.svg)](https://david-dm.org/lovvedit/lovvedit)
+[![Development Dependencies](https://david-dm.org/lovvedit/lovvedit.svg)](https://david-dm.org/lovvedit/lovvedit?type=dev)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 ## Table of Contents
