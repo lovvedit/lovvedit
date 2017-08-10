@@ -42,7 +42,7 @@
 
 Current maintainers:
 
-* Diego Stratta <[strattadb@gmail.com](strattadb@gmail.com)>
+* Diego Stratta <[strattadb@gmail.com](mailto:strattadb@gmail.com)>
 
 ## License
 
