@@ -12,10 +12,9 @@ const MONGO_HOST = process.env.MONGO_HOST;
 const MONGO_PORT = process.env.MONGO_PORT;
 
 const MONGO_CONNECTION_URL = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
-
 mongoose.Promise = Promise;
 
-mongoose.connect(MONGO_CONNECTION_URL);
+mongoose.connect(MONGO_CONNECTION_URL, { useMongoClient: true });
 const db = mongoose.connection;
 
 db
