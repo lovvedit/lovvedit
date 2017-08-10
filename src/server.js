@@ -10,11 +10,11 @@ import Koa from 'koa';
 import cors from 'kcors';
 import bodyParser from 'koa-bodyparser';
 import koaLogger from 'koa-logger';
+import logger from 'winston';
 
 import router from './router';
 
 import './config/mongoose';
-import logger from './config/winston';
 
 const NODE_ENV = process.env.NODE_ENV;
 const PORT = process.env.PORT;

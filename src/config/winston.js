@@ -16,5 +16,3 @@ winston.configure({
     }),
   ],
 });
-
-export default winston;

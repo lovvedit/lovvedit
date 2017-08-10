@@ -4,8 +4,7 @@
  */
 
 import mongoose from 'mongoose';
-
-import logger from './winston';
+import logger from 'winston';
 
 const MONGO_NAME = process.env.MONGO_NAME;
 const MONGO_HOST = process.env.MONGO_HOST;
