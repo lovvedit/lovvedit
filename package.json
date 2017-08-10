@@ -1,6 +1,7 @@
 {
   "name": "lovvedit",
   "version": "1.0.0",
+  "description": "lovvedit's API",
   "main": "src/server.js",
   "private": true,
   "scripts": {
@@ -52,9 +53,6 @@
     "winston": "^2.3.1"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier-eslint --write",
-      "git add"
-    ]
+    "*.js": ["prettier-eslint --write", "git add"]
   }
 }

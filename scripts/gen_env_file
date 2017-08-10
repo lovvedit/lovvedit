@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# Copies the env variables template file to the project root folder.
+
+readonly CURRENT_DIR="$(builtin cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly PROJECT_ROOT_DIR="${CURRENT_DIR}/.."
+
+readonly ENV_TEMPLATE_FILE=".env.template"
+readonly ENV_FILE=".env"
+
+cp "${PROJECT_ROOT_DIR}/${ENV_TEMPLATE_FILE}" "${PROJECT_ROOT_DIR}/${ENV_FILE}"
