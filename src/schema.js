@@ -5,6 +5,6 @@
 
 import { GraphQLSchema } from 'graphql';
 
-import { QueryType } from './components/query';
+import QueryType from './components/query/types';
 
 export default new GraphQLSchema({ query: QueryType });

@@ -1,8 +1,6 @@
 import bcrypt from 'bcrypt';
 import mongoose, { Schema } from 'mongoose';
 
-const passwordMaxLength = 127;
-
 const UserSchema = new Schema({
   username: {
     type: String,
@@ -14,25 +12,14 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    maxlength: passwordMaxLength,
+    maxlength: 127,
     required: true,
     select: false,
-  },
-  firstName: {
-    type: String,
-    minlength: 2,
-    maxlength: 50,
-    trim: true,
-  },
-  lastName: {
-    type: String,
-    minlength: 2,
-    maxlength: 150,
-    trim: true,
   },
   role: {
     type: String,
     enum: ['user', 'admin'],
+    default: 'user',
   },
   dateJoined: {
     type: Date,
@@ -43,8 +30,6 @@ const UserSchema = new Schema({
     default: false,
   },
 });
-
-UserSchema.virtual('fullName').get(() => `${this.firstName} ${this.lastName}`);
 
 const SALT_ROUNDS = parseInt(process.env.BCRYPT_SALT_ROUNDS, 10);
 
@@ -67,17 +52,12 @@ UserSchema.pre('save', async function hashPasswordPreSave(next) {
  * @param {string} password - The plaintext password to compare.
  * @returns {boolean}
  */
-async function comparePassword(password) {
-  const { password: hashedPassword } = this.model('User')
+UserSchema.methods.comparePassword = async function comparePassword(password) {
+  const { password: hashedPassword } = await this.model('User')
     .findOne({ _id: this.id })
     .select({ password: 1 });
-  const matches = await bcrypt.compare(password, hashedPassword);
 
-  return matches;
-}
+  return bcrypt.compare(password, hashedPassword);
+};
 
-UserSchema.methods.comparePassword = comparePassword;
-
-const User = mongoose.model('User', UserSchema);
-
-export { User as default, UserSchema, comparePassword };
+export default mongoose.model('User', UserSchema);

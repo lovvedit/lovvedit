@@ -11,21 +11,32 @@ import cors from 'kcors';
 import bodyParser from 'koa-bodyparser';
 import koaLogger from 'koa-logger';
 import logger from 'winston';
+import mongoose from 'mongoose';
+
+import configureWinston from './config/winston';
+import configureMongo from './config/mongoose';
 
 import router from './router';
 
-import './config/mongoose';
+const { NODE_ENV, PORT, MONGO_HOST, MONGO_PORT, MONGO_NAME, LOG_LEVEL } = process.env;
+const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
 
-const NODE_ENV = process.env.NODE_ENV;
-const PORT = process.env.PORT;
+(async function main() {
+  // Configure MongoDB
+  mongoose.Promise = Promise;
+  await configureMongo(mongoose, MONGO_URI);
 
-const app = new Koa();
+  // Configure Winston
+  configureWinston(logger, LOG_LEVEL);
 
-app
-  .use(koaLogger())
-  .use(bodyParser())
-  .use(router.routes())
-  .use(router.allowedMethods())
-  .use(cors());
+  const app = new Koa();
 
-app.listen(PORT, () => logger.info(`API server listening on port ${PORT} on ${NODE_ENV} mode`));
+  app
+    .use(koaLogger())
+    .use(bodyParser())
+    .use(router.routes())
+    .use(router.allowedMethods())
+    .use(cors());
+
+  app.listen(PORT, () => logger.info(`API server listening on port ${PORT} on ${NODE_ENV} mode`));
+}());

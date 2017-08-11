@@ -4,15 +4,27 @@
  * Winston is the logger we're using.
  */
 
-import winston from 'winston';
+const { LOG_FILE } = process.env;
 
-const LOG_LEVEL = process.env.LOG_LEVEL;
+/**
+ * @description
+ * Configure Winston's transports.
+ *
+ * @export
+ * @param {any} winston - The Winston module.
+ * @param {string} level - The log level. E.g. `debug`, `info`, etc.
+ */
+export default function configureWinston(winston, level) {
+  winston.configure({
+    transports: [
+      new winston.transports.Console({
+        colorize: true,
+        level,
+      }),
+    ],
+  });
 
-winston.configure({
-  transports: [
-    new winston.transports.Console({
-      colorize: true,
-      level: LOG_LEVEL,
-    }),
-  ],
-});
+  if (LOG_FILE) {
+    winston.add(winston.transports.File({ filename: LOG_FILE }));
+  }
+}
