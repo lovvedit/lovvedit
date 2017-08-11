@@ -2,8 +2,8 @@
 
 > Media recommendation website
 
-[![Dependencies](https://david-dm.org/lovvedit/lovvedit.svg)](https://david-dm.org/lovvedit/lovvedit)
-[![Development Dependencies](https://david-dm.org/lovvedit/lovvedit.svg)](https://david-dm.org/lovvedit/lovvedit?type=dev)
+[![Dependencies Status](https://david-dm.org/lovvedit/lovvedit.svg)](https://david-dm.org/lovvedit/lovvedit)
+[![Development Dependencies Status](https://david-dm.org/lovvedit/lovvedit/dev-status.svg)](https://david-dm.org/lovvedit/lovvedit?type=dev)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 ## Table of Contents
