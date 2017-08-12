@@ -10,4 +10,4 @@ before_script:
   - docker-compose build
 
 script:
-  - docker-compose run node ls node_modules
+  - docker-compose run node ls node_modules src && pwd
