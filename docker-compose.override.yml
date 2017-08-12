@@ -9,7 +9,3 @@ services:
       - .:/usr/src/app
     env_file:
       - .env
-
-  mongo:
-    env_file:
-      - .env
