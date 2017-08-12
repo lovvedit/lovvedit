@@ -8,6 +8,7 @@ describe('User', () => {
     const { MONGO_HOST, MONGO_PORT } = process.env;
     const MONGO_NAME = 'lovvedit_test';
     const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
+    console.log(MONGO_URI);
     mongoose.Promise = Promise;
 
     await configureMongo(mongoose, MONGO_URI);
