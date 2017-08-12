@@ -12,6 +12,7 @@ before_script:
   - docker --version
   - docker-compose --version
 
+  - scripts/gen_env_file
   - docker-compose up --build
 
 script:
