@@ -1,13 +1,12 @@
 # lovvedit
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/lovvedit/lovvedit.svg)](https://greenkeeper.io/)
-
 > Media recommendation website
 
 [![Build Status](https://travis-ci.org/lovvedit/lovvedit.svg?branch=master)](https://travis-ci.org/lovvedit/lovvedit)
 [![codecov](https://codecov.io/gh/lovvedit/lovvedit/branch/master/graph/badge.svg)](https://codecov.io/gh/lovvedit/lovvedit)
 [![Dependencies Status](https://david-dm.org/lovvedit/lovvedit.svg)](https://david-dm.org/lovvedit/lovvedit)
 [![Development Dependencies Status](https://david-dm.org/lovvedit/lovvedit/dev-status.svg)](https://david-dm.org/lovvedit/lovvedit?type=dev)
+[![Greenkeeper badge](https://badges.greenkeeper.io/lovvedit/lovvedit.svg)](https://greenkeeper.io/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 ## Table of Contents
