@@ -10,4 +10,4 @@ before_script:
   - docker-compose build
 
 script:
-  - docker-compose run node yarn run coverage
+  - docker-compose -e CODECOV_TOKEN run node yarn run coverage
