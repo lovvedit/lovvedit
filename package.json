@@ -10,7 +10,8 @@
     "prebuild": "yarn run clean",
     "build": "babel src -d build",
     "test": "jest",
-    "coverage": "yarn test && codecov",
+    "precoverage": "yarn test",
+    "coverage": "codecov",
     "precommit": "lint-staged",
     "clean": "rimraf build"
   },
