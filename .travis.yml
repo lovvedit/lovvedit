@@ -7,7 +7,7 @@ services:
 
 before_script:
   - scripts/gen_env_file
-  - docker-compose build --no-cache
+  - docker-compose build
 
 script:
-  - docker-compose run node ls
+  - docker-compose run node yarn run coverage
