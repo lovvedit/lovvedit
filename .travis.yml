@@ -1,5 +1,7 @@
 sudo: required
 
+language: generic
+
 services:
   - docker
 
@@ -8,4 +10,4 @@ before_script:
   - docker-compose build
 
 script:
-  - docker-compose run node yarn run coverage
+  - docker-compose run node yarn test
