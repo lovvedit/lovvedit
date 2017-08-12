@@ -1,5 +1,7 @@
 # lovvedit
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/lovvedit/lovvedit.svg)](https://greenkeeper.io/)
+
 > Media recommendation website
 
 [![Build Status](https://travis-ci.org/lovvedit/lovvedit.svg?branch=master)](https://travis-ci.org/lovvedit/lovvedit)
