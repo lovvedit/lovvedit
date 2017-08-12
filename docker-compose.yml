@@ -14,6 +14,17 @@ services:
     build: .
     depends_on:
       - mongo
+    environment:
+      - NODE_ENV
+      - PORT
+      - MONGO_NAME
+      - MONGO_HOST
+      - MONGO_PORT
+      - EMAIL_SERVICE
+      - EMAIL_URI
+      - EMAIL_PASS
+      - JWT_SECRET
+      - LOG_LEVEL
 
   # The main database
   mongo:
