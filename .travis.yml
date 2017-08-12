@@ -5,6 +5,7 @@ services:
 
 before_script:
   - scripts/gen_env_file
+  - docker-compose pull
   - docker-compose build
 
 script:
