@@ -5,7 +5,7 @@ services:
 
 before_script:
   - scripts/gen_env_file
-  - docker-compose up --build
+  - docker-compose build
 
 script:
-  - docker-compose exec node yarn coverage
+  - docker-compose run node yarn run coverage
