@@ -10,6 +10,7 @@
     "prebuild": "npm run clean",
     "build": "babel src -d build",
     "test": "jest",
+    "coverage": "jest && codecov",
     "precommit": "lint-staged",
     "clean": "rimraf build"
   },
@@ -25,6 +26,7 @@
     "babel-plugin-dynamic-import-node": "^1.0.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "codecov": "^2.3.0",
     "eslint": "^4.4.1",
     "eslint-config-airbnb-base": "^11.3.1",
     "eslint-config-prettier": "^2.3.0",
@@ -51,6 +53,10 @@
     "mongoose": "^4.11.6",
     "nodemailer": "^4.0.1",
     "winston": "^2.3.1"
+  },
+  "jest": {
+    "coverageDirectory": "coverage",
+    "collectCoverage": true
   },
   "lint-staged": {
     "*.js": ["prettier-eslint --write", "git add"]

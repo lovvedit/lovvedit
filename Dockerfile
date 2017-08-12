@@ -1,4 +1,4 @@
-FROM node:8.2.1
+FROM node:8.3.0
 
 LABEL name="lovvedit_api"
 LABEL version="1.0.0"
