@@ -6,7 +6,6 @@ services:
   - docker
 
 before_script:
-  - scripts/gen_env_file
   - docker-compose build
 
 script:
