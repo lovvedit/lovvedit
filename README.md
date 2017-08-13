@@ -52,7 +52,6 @@ $ docker-compose build
 Generate the file with environmental varibles `.env`:
 
 ```bash
-$ cd lovvedit
 $ scripts/gen_env_file
 ```
 
