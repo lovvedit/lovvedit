@@ -7,6 +7,7 @@
 [![Dependencies Status](https://david-dm.org/lovvedit/lovvedit.svg)](https://david-dm.org/lovvedit/lovvedit)
 [![Development Dependencies Status](https://david-dm.org/lovvedit/lovvedit/dev-status.svg)](https://david-dm.org/lovvedit/lovvedit?type=dev)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 ## Table of Contents
 
