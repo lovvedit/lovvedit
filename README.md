@@ -1,6 +1,6 @@
 # lovvedit
 
-> Media recommendation website
+> Media recommendation website.
 
 [![Build Status](https://travis-ci.org/lovvedit/lovvedit.svg?branch=master)](https://travis-ci.org/lovvedit/lovvedit)
 [![codecov](https://codecov.io/gh/lovvedit/lovvedit/branch/master/graph/badge.svg)](https://codecov.io/gh/lovvedit/lovvedit)
@@ -25,15 +25,47 @@
 
 ## Introduction
 
+lovvedit is a website to recommend others stuff (books, movies, tv shows, etc) you, well, *loved*.
+So, for example, when you run out of shows to binge-watch, you can go here and read what other
+people enjoyed and maybe give those things a try.
+
 ## Getting Started
 
 ### Requirements
 
+You'll need [Docker](https://docs.docker.com/engine/installation/),
+[Docker Compose](https://docs.docker.com/compose/install/)
+and [Git](https://git-scm.com/) installed in your
+machine for development.
+
 ### Installation
+
+Clone the repo and build the Docker containers:
+
+```bash
+$ git clone https://github.com/lovvedit/lovvedit.git
+$ cd lovvedit
+$ docker-compose build
+```
 
 ## Setting up Development Environment
 
+Start the application:
+
+```bash
+$ docker-compose up
+```
+
+Now the application should be listening on port 80.
+Go to `http://api.localhost/graphiql` and check that you see the GraphiQL page.
+
 ## Testing
+
+You can test the application inside the Docker container with:
+
+```bash
+$ docker-compose exec node yarn test
+```
 
 ## Deploying
 
