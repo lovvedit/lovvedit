@@ -1,8 +1,6 @@
 import nodemailer from 'nodemailer';
 
-const EMAIL_SERVICE = process.env.EMAIL_SERVICE;
-const EMAIL_URI = process.env.EMAIL_URI;
-const EMAIL_PASS = process.env.EMAIL_PASS;
+const { EMAIL_SERVICE, EMAIL_URI, EMAIL_PASS } = process.env;
 
 export default nodemailer.createTransport({
   service: EMAIL_SERVICE,

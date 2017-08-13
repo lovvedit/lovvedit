@@ -5,6 +5,14 @@
 
 import logger from 'winston';
 
+/**
+ * @description
+ * Connect to the MongoDB database and log its events.
+ *
+ * @export
+ * @param {any} mongoose - The mongoose module.
+ * @param {any} uri - The MongoDB connection URI.
+ */
 export default async function configureMongo(mongoose, uri) {
   const { connection } = mongoose;
   connection

@@ -3,14 +3,14 @@ import { graphqlKoa, graphiqlKoa } from 'graphql-server-koa';
 
 import GraphQLSchema from './schema';
 
-const NODE_ENV = process.env.NODE_ENV;
+const { NODE_ENV } = process.env;
 
 const router = new Router();
 
 const graphqlRoute = '/graphql';
 const graphiqlRoute = '/graphiql';
 
-router
+export default router
   .get(graphqlRoute, graphqlKoa({ schema: GraphQLSchema }))
   .post(graphqlRoute, graphqlKoa({ schema: GraphQLSchema }));
 
@@ -20,5 +20,3 @@ if (NODE_ENV === 'development') {
     .get(graphiqlRoute, graphiqlKoa({ endpoint: graphqlRoute }))
     .post(graphiqlRoute, graphiqlKoa({ endpoint: graphqlRoute }));
 }
-
-export default router;

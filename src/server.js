@@ -16,23 +16,25 @@ import mongoose from 'mongoose';
 import configureWinston from './config/winston';
 import configureMongo from './config/mongoose';
 
+import authenticate from './middleware/auth';
+
 import router from './router';
 
 const { NODE_ENV, PORT, MONGO_HOST, MONGO_PORT, MONGO_NAME, LOG_LEVEL } = process.env;
 const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
 
 (async function main() {
+  // Configure Winston
+  configureWinston(logger, LOG_LEVEL);
+
   // Configure MongoDB
   mongoose.Promise = Promise;
   await configureMongo(mongoose, MONGO_URI);
 
-  // Configure Winston
-  configureWinston(logger, LOG_LEVEL);
-
   const app = new Koa();
-
   app
     .use(koaLogger())
+    .use(authenticate)
     .use(bodyParser())
     .use(router.routes())
     .use(router.allowedMethods())

@@ -13,9 +13,9 @@ describe('User', () => {
     await configureMongo(mongoose, MONGO_URI);
   });
 
-  beforeEach(async () => mongoose.connection.dropDatabase());
+  beforeEach(() => mongoose.connection.dropDatabase());
 
-  afterAll(async () => mongoose.connection.close());
+  afterAll(() => mongoose.connection.close());
 
   describe('comparePassword()', () => {
     it('should return true when passwords match', async () => {
