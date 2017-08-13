@@ -14,7 +14,7 @@ $ git clone git@github.com:<your_username>/lovvedit.git
 Make your change. Add tests for your change. Make the tests pass:
 
 ```bash
-$ yarn test
+$ docker-compose exec node yarn test
 ```
 
 Push to your fork and [submit a pull request][pr].

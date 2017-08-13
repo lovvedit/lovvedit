@@ -17,7 +17,6 @@
     * [Installation](#installation)
 * [Setting Up Development Environment](#setting-up-development-environment)
 * [Testing](#testing)
-* [Deploying](#deploying)
 * [Contributing](#contributing)
 * [FAQ](#faq)
 * [Maintainers](#maintainers)
@@ -50,6 +49,15 @@ $ docker-compose build
 
 ## Setting up Development Environment
 
+Generate the file with environmental varibles `.env`:
+
+```bash
+$ cd lovvedit
+$ scripts/gen_env_file
+```
+
+Fill manually the empty variables.
+
 Start the application:
 
 ```bash
@@ -66,8 +74,6 @@ You can test the application inside the Docker container with:
 ```bash
 $ docker-compose exec node yarn test
 ```
-
-## Deploying
 
 ## Contributing
 
