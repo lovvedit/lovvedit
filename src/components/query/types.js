@@ -8,8 +8,11 @@ import { GraphQLObjectType, GraphQLString } from 'graphql';
 export default new GraphQLObjectType({
   name: 'Query',
   fields: {
-    name: {
+    hero: {
       type: GraphQLString,
+      resolve() {
+        return 'ello';
+      },
     },
   },
 });

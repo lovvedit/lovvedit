@@ -10,13 +10,12 @@ const router = new Router();
 const graphqlRoute = '/graphql';
 const graphiqlRoute = '/graphiql';
 
-export default router
-  .get(graphqlRoute, graphqlKoa({ schema: GraphQLSchema }))
-  .post(graphqlRoute, graphqlKoa({ schema: GraphQLSchema }));
+export default router.all(
+  graphqlRoute,
+  graphqlKoa(ctx => ({ schema: GraphQLSchema, context: { user: ctx.state.user } })),
+);
 
 // We only want GraphiQL for development
 if (NODE_ENV === 'development') {
-  router
-    .get(graphiqlRoute, graphiqlKoa({ endpoint: graphqlRoute }))
-    .post(graphiqlRoute, graphiqlKoa({ endpoint: graphqlRoute }));
+  router.get(graphiqlRoute, graphiqlKoa({ endpointURL: graphqlRoute }));
 }
