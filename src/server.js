@@ -12,11 +12,11 @@ import bodyParser from 'koa-bodyparser';
 import koaLogger from 'koa-logger';
 import logger from 'winston';
 import mongoose from 'mongoose';
+import passport from 'koa-passport';
 
 import configureWinston from './config/winston';
 import configureMongo from './config/mongoose';
-
-import authenticate from './middleware/auth';
+import configurePassport from './config/passport';
 
 import router from './router';
 
@@ -31,11 +31,20 @@ const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
   mongoose.Promise = Promise;
   await configureMongo(mongoose, MONGO_URI);
 
+  // Configure Passport
+  configurePassport(passport);
+
   const app = new Koa();
   app
     .use(koaLogger())
-    .use(authenticate)
     .use(bodyParser())
+    .use(passport.initialize())
+    .use((ctx, next) =>
+      passport.authenticate('jwt', { session: false }, (err, user) => {
+        ctx.state.user = user || null;
+        return next();
+      })(ctx),
+    )
     .use(router.routes())
     .use(router.allowedMethods())
     .use(cors());

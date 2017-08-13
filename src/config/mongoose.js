@@ -11,7 +11,7 @@ import logger from 'winston';
  *
  * @export
  * @param {any} mongoose - The mongoose module.
- * @param {any} uri - The MongoDB connection URI.
+ * @param {string} uri - The MongoDB connection URI.
  */
 export default async function configureMongo(mongoose, uri) {
   const { connection } = mongoose;
