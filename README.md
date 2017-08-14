@@ -49,13 +49,14 @@ $ docker-compose build
 
 ## Setting up Development Environment
 
-Generate the file with environmental varibles `.env`:
+Generate the file with environmental varibles:
 
 ```bash
 $ scripts/gen_env_file
 ```
 
-Fill manually the empty variables.
+This will create a file `.env` in the project root directory.
+Some variables are left blank on purpose. Fill manually the empty variables.
 
 Start the application:
 
