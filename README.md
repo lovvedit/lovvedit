@@ -13,8 +13,8 @@
 
 * [Introduction](#introduction)
 * [Getting Started](#getting-started)
-    * [Requirements](#requirements)
-    * [Installation](#installation)
+  * [Requirements](#requirements)
+  * [Installation](#installation)
 * [Setting Up Development Environment](#setting-up-development-environment)
 * [Testing](#testing)
 * [Contributing](#contributing)

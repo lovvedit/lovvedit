@@ -6,6 +6,8 @@
  * @license MIT
  */
 
+import { createServer } from 'http';
+
 import Koa from 'koa';
 import cors from 'kcors';
 import bodyParser from 'koa-bodyparser';
@@ -13,12 +15,15 @@ import koaLogger from 'koa-logger';
 import logger from 'winston';
 import mongoose from 'mongoose';
 import passport from 'koa-passport';
+import { execute, subscribe } from 'graphql';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
 
 import configureWinston from './config/winston';
 import configureMongo from './config/mongoose';
 import configurePassport from './config/passport';
 
-import router from './router';
+import GraphQLSchema from './schema';
+import router, { SUBSCRIPTIONS_PATH } from './router';
 
 const { NODE_ENV, PORT, MONGO_HOST, MONGO_PORT, MONGO_NAME, LOG_LEVEL } = process.env;
 const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
@@ -49,5 +54,18 @@ const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
     .use(router.allowedMethods())
     .use(cors());
 
-  app.listen(PORT, () => logger.info(`API server listening on port ${PORT} on ${NODE_ENV} mode`));
+  const server = createServer(app.callback());
+
+  server.listen(PORT, () => {
+    logger.info(`GraphQL server listening on port ${PORT} on ${NODE_ENV} mode`);
+  });
+
+  SubscriptionServer.create(
+    {
+      schema: GraphQLSchema,
+      execute,
+      subscribe,
+    },
+    { server, path: SUBSCRIPTIONS_PATH },
+  );
 }());

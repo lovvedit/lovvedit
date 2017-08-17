@@ -3,19 +3,26 @@ import { graphqlKoa, graphiqlKoa } from 'graphql-server-koa';
 
 import GraphQLSchema from './schema';
 
-const { NODE_ENV } = process.env;
+const { NODE_ENV, PORT } = process.env;
 
 const router = new Router();
 
-const graphqlRoute = '/graphql';
-const graphiqlRoute = '/graphiql';
+const GRAPHQL_PATH = '/graphql';
+const GRAPHIQL_PATH = '/graphiql';
+export const SUBSCRIPTIONS_PATH = '/subscriptions';
 
 export default router.all(
-  graphqlRoute,
+  GRAPHQL_PATH,
   graphqlKoa(ctx => ({ schema: GraphQLSchema, context: { user: ctx.state.user } })),
 );
 
 // We only want GraphiQL for development
 if (NODE_ENV === 'development') {
-  router.get(graphiqlRoute, graphiqlKoa({ endpointURL: graphqlRoute }));
+  router.get(
+    GRAPHIQL_PATH,
+    graphiqlKoa({
+      endpointURL: GRAPHQL_PATH,
+      subscriptionsEndpoint: `ws://localhost:${PORT}${SUBSCRIPTIONS_PATH}`,
+    }),
+  );
 }

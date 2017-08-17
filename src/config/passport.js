@@ -5,10 +5,9 @@ import User from '../components/users/models';
 const { JWT_SECRET } = process.env;
 
 export default function configurePassport(passport) {
-  const AuthHeaderScheme = 'Bearer';
   const options = {
     secretOrKey: JWT_SECRET,
-    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme(AuthHeaderScheme),
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   };
 
   passport.use(
