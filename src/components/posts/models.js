@@ -17,11 +17,7 @@ const PostSchema = new Schema({
     type: String,
     trim: true,
   },
-  upVotes: {
-    type: Number,
-    default: 0,
-  },
-  downVotes: {
+  likes: {
     type: Number,
     default: 0,
   },

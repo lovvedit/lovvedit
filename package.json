@@ -19,27 +19,27 @@
   "author": "Diego Stratta <strattadb@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": ">=8.3.0"
+    "node": ">=8.4.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-plugin-dynamic-import-node": "^1.0.2",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "codecov": "^2.3.0",
     "eslint": "^4.4.1",
     "eslint-config-airbnb-base": "^11.3.1",
     "eslint-config-prettier": "^2.3.0",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-prettier": "^2.1.2",
+    "eslint-plugin-prettier": "^2.2.0",
     "husky": "^0.14.3",
     "jest": "^20.0.4",
     "lint-staged": "^4.0.3",
     "nodemon": "^1.11.0",
     "prettier": "^1.5.3",
     "prettier-eslint": "^6.4.2",
-    "prettier-eslint-cli": "^4.1.1",
+    "prettier-eslint-cli": "^4.2.0",
     "rimraf": "^2.6.1"
   },
   "dependencies": {
@@ -54,7 +54,7 @@
     "koa-logger": "^3.0.1",
     "koa-passport": "^3.0.0",
     "koa-router": "^7.2.1",
-    "mongoose": "^4.11.6",
+    "mongoose": "^4.11.7",
     "nodemailer": "^4.0.1",
     "subscriptions-transport-ws": "^0.8.2",
     "passport-jwt": "^3.0.0",
@@ -65,9 +65,6 @@
     "collectCoverage": true
   },
   "lint-staged": {
-    "*.js": [
-      "prettier-eslint --write",
-      "git add"
-    ]
+    "*.js": ["prettier-eslint --write", "git add"]
   }
 }

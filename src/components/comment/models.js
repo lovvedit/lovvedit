@@ -20,11 +20,7 @@ const CommentSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  upVotes: {
-    type: Number,
-    default: 0,
-  },
-  downVotes: {
+  likes: {
     type: Number,
     default: 0,
   },

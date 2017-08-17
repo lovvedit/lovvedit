@@ -12,9 +12,9 @@ export default new GraphQLObjectType({
       type: GraphQLID,
       description: 'The author of the comment.',
     },
-    score: {
+    likes: {
       type: GraphQLInt,
-      description: 'The score of the comment.',
+      description: 'The like quantity of the comment.',
     },
   }),
 });

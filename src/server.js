@@ -22,7 +22,7 @@ import configureWinston from './config/winston';
 import configureMongo from './config/mongoose';
 import configurePassport from './config/passport';
 
-import GraphQLSchema from './schema';
+import schema from './schema';
 import router, { SUBSCRIPTIONS_PATH } from './router';
 
 const { NODE_ENV, PORT, MONGO_HOST, MONGO_PORT, MONGO_NAME, LOG_LEVEL } = process.env;
@@ -62,7 +62,7 @@ const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
 
   SubscriptionServer.create(
     {
-      schema: GraphQLSchema,
+      schema,
       execute,
       subscribe,
     },

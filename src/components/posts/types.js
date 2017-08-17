@@ -8,9 +8,10 @@ import {
   GraphQLInt,
 } from 'graphql';
 
+import pageInfoType from '../../commonTypes/pageInfo';
 import commentType from '../comment/types';
 
-export default new GraphQLObjectType({
+export const postType = new GraphQLObjectType({
   name: 'Post',
   description: 'A post recommending something.',
   fields: () => ({
@@ -34,13 +35,36 @@ export default new GraphQLObjectType({
       type: GraphQLString,
       description: 'The link where one can get the stuff the post is recommending.',
     },
-    score: {
+    likes: {
       type: GraphQLInt,
-      description: 'The score of the post.',
+      description: 'The like quantity of the post.',
     },
     comments: {
       type: new GraphQLList(commentType),
       description: 'The comments of the post.',
+    },
+  }),
+});
+
+const postEdge = new GraphQLObjectType({
+  name: 'PostEdge',
+  fields: () => ({
+    cursor: {
+      type: GraphQLString,
+    },
+    node: { type: postType },
+  }),
+});
+
+export const postsType = new GraphQLObjectType({
+  name: 'Posts',
+  fields: () => ({
+    pageInfo: {
+      type: new GraphQLNonNull(pageInfoType),
+      description: 'Pagination info.',
+    },
+    edges: {
+      type: new GraphQLList(postEdge),
     },
   }),
 });

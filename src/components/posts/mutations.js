@@ -1,6 +1,6 @@
 import { GraphQLNonNull } from 'graphql';
 
-import postType, { postInputType } from './types';
+import { postType, postInputType } from '../posts/types';
 import { createPostResolver } from './resolvers';
 
 export const createPost = {
