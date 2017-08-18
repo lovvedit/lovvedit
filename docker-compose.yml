@@ -1,17 +1,10 @@
 version: '3'
 services:
-  # The reverse proxy
-  nginx:
-    build: ./nginx
-    ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - node
-
   # The Node.js API
   node:
     build: .
+    ports:
+      - "44300:44300"
     depends_on:
       - mongo
     environment:
