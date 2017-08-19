@@ -3,13 +3,16 @@ import {
   GraphQLInputObjectType,
   GraphQLNonNull,
   GraphQLList,
+  GraphQLBoolean,
   GraphQLID,
   GraphQLString,
   GraphQLInt,
 } from 'graphql';
 
-import pageInfoType from '../../commonTypes/pageInfo';
+import { pageInfoType } from '../../common/types';
 import commentType from '../comment/types';
+import { userType } from '../users/types';
+import { resolveIsLiked } from '../../common/resolvers';
 
 export const postType = new GraphQLObjectType({
   name: 'Post',
@@ -20,7 +23,7 @@ export const postType = new GraphQLObjectType({
       description: 'The id of the post.',
     },
     author: {
-      type: new GraphQLNonNull(GraphQLID),
+      type: new GraphQLNonNull(userType),
       description: 'The author of the post.',
     },
     title: {
@@ -38,9 +41,15 @@ export const postType = new GraphQLObjectType({
     likes: {
       type: GraphQLInt,
       description: 'The like quantity of the post.',
+      resolve: post => post.getLikeCount(),
+    },
+    liked: {
+      type: GraphQLBoolean,
+      description: 'Is the post liked by the current user?',
+      resolve: resolveIsLiked,
     },
     comments: {
-      type: new GraphQLList(commentType),
+      type: new GraphQLNonNull(new GraphQLList(commentType)),
       description: 'The comments of the post.',
     },
   }),
@@ -49,15 +58,14 @@ export const postType = new GraphQLObjectType({
 const postEdge = new GraphQLObjectType({
   name: 'PostEdge',
   fields: () => ({
-    cursor: {
-      type: GraphQLString,
-    },
-    node: { type: postType },
+    cursor: { type: new GraphQLNonNull(GraphQLString) },
+    node: { type: new GraphQLNonNull(postType) },
   }),
 });
 
 export const postsType = new GraphQLObjectType({
   name: 'Posts',
+  description: 'A post list connection.',
   fields: () => ({
     pageInfo: {
       type: new GraphQLNonNull(pageInfoType),

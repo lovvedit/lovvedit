@@ -1,7 +1,7 @@
-import { GraphQLNonNull } from 'graphql';
+import { GraphQLNonNull, GraphQLString } from 'graphql';
 
 import { postType, postInputType } from '../posts/types';
-import { createPostResolver } from './resolvers';
+import { resolveCreatePost, resolveUpdatePost, resolveToggleLikePost } from './resolvers';
 
 export const createPost = {
   name: 'createPost',
@@ -10,9 +10,26 @@ export const createPost = {
   args: {
     post: { type: new GraphQLNonNull(postInputType) },
   },
-  resolve: createPostResolver,
+  resolve: resolveCreatePost,
 };
 
 export const updatePost = {
   name: 'updatePost',
+  description: 'Update a post.',
+  type: postType,
+  args: {
+    id: { type: new GraphQLNonNull(GraphQLString) },
+    post: { type: new GraphQLNonNull(postInputType) },
+  },
+  resolve: resolveUpdatePost,
+};
+
+export const toggleLikePost = {
+  name: 'toggleLikePost',
+  description: 'Toggle like.',
+  type: postType,
+  args: {
+    id: { type: new GraphQLNonNull(GraphQLString) },
+  },
+  resolve: resolveToggleLikePost,
 };

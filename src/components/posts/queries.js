@@ -1,9 +1,19 @@
-import { GraphQLInt, GraphQLString } from 'graphql';
+import { GraphQLNonNull, GraphQLInt, GraphQLString } from 'graphql';
 
-import { postsType } from './types';
-import { resolvePosts } from './resolvers';
+import { pageInfoType } from '../../common/types';
+import { postType, postsType } from './types';
+import { resolvePost, resolvePosts } from './resolvers';
 
-export default {
+export const post = {
+  type: postType,
+  description: 'Get a post by its id.',
+  args: {
+    id: { type: GraphQLString },
+  },
+  resolve: resolvePost,
+};
+
+export const posts = {
   type: postsType,
   description: 'The posts list connection.',
   args: {
@@ -11,4 +21,9 @@ export default {
     after: { type: GraphQLString },
   },
   resolve: resolvePosts,
+};
+
+export const pageInfo = {
+  type: new GraphQLNonNull(pageInfoType),
+  description: 'Pagination info.',
 };

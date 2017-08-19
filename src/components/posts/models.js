@@ -1,5 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
+import Like from '../likes/models';
+
 const PostSchema = new Schema({
   title: {
     type: String,
@@ -17,10 +19,6 @@ const PostSchema = new Schema({
     type: String,
     trim: true,
   },
-  likes: {
-    type: Number,
-    default: 0,
-  },
   link: {
     type: String,
     trim: true,
@@ -31,8 +29,13 @@ const PostSchema = new Schema({
   },
 });
 
-PostSchema.virtual('score').get(function getPostScore() {
-  return this.upVotes - this.downVotes;
-});
+PostSchema.methods.getLikeCount = function getLikeCount() {
+  return Like.where({ target: this.id }).count();
+};
+
+PostSchema.methods.toggleLike = async function toggleLike(userId) {
+  await Like.toggle(this.id, userId);
+  return this;
+};
 
 export default mongoose.model('Post', PostSchema);
