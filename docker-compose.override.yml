@@ -2,6 +2,8 @@ version: '3'
 services:
   node:
     command: yarn run start:dev
+    ports:
+      - "44300:44300"
     volumes:
       - .:/usr/src/app
     env_file:

@@ -42,9 +42,9 @@ machine for development.
 Clone the repo and build the Docker containers:
 
 ```bash
-$ git clone https://github.com/lovvedit/lovvedit.git
-$ cd lovvedit
-$ docker-compose build
+git clone https://github.com/lovvedit/lovvedit.git
+cd lovvedit
+docker-compose build
 ```
 
 ## Setting up Development Environment
@@ -52,7 +52,7 @@ $ docker-compose build
 Generate the file with environmental varibles:
 
 ```bash
-$ scripts/gen_env_file
+scripts/gen_env_file
 ```
 
 This will create a file `.env` in the project root directory.
@@ -61,18 +61,18 @@ Some variables are left blank on purpose. Fill manually the empty variables.
 Start the application:
 
 ```bash
-$ docker-compose up
+docker-compose up
 ```
 
 Now the application should be listening on port 80.
-Go to `http://api.localhost/graphiql` and check that you see the GraphiQL page.
+Go to `[http://localhost:44300/graphiql](http://localhost:44300/graphiql)` and check that you see the GraphiQL page.
 
 ## Testing
 
 You can test the application inside the Docker container with:
 
 ```bash
-$ docker-compose exec node yarn test
+docker-compose exec node yarn test
 ```
 
 ## Contributing

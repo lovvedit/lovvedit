@@ -3,8 +3,6 @@ services:
   # The Node.js API
   node:
     build: .
-    ports:
-      - "44300:44300"
     depends_on:
       - mongo
     environment:

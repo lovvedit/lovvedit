@@ -8,13 +8,13 @@ agree to abide by the lovvedit [code of conduct].
 Fork, then clone the repo:
 
 ```bash
-$ git clone git@github.com:<your_username>/lovvedit.git
+git clone git@github.com:<your_username>/lovvedit.git
 ```
 
 Make your change. Add tests for your change. Make the tests pass:
 
 ```bash
-$ docker-compose exec node yarn test
+docker-compose exec node yarn test
 ```
 
 Push to your fork and [submit a pull request][pr].
