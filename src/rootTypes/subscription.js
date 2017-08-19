@@ -3,10 +3,15 @@
  * The root subscription GraphQL type definition.
  */
 
-import { GraphQLObjectType } from 'graphql';
+import { GraphQLObjectType, GraphQLString } from 'graphql';
 
 export default new GraphQLObjectType({
   name: 'Subscription',
   description: 'The root subscription.',
-  fields: () => ({}),
+  fields: () => ({
+    messageReceived: {
+      type: GraphQLString,
+      resolve: () => 'hola! ws',
+    },
+  }),
 });

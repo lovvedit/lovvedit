@@ -11,4 +11,4 @@ import {
   subscriptionType as subscription,
 } from './rootTypes';
 
-export default new GraphQLSchema({ query, mutation });
+export default new GraphQLSchema({ query, mutation, subscription });

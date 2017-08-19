@@ -24,6 +24,7 @@ import configurePassport from './config/passport';
 
 import schema from './schema';
 import router, { SUBSCRIPTIONS_PATH } from './router';
+import { subscriptionServerOnConnect } from './config/subscriptions';
 
 const { NODE_ENV, PORT, MONGO_HOST, MONGO_PORT, MONGO_NAME, LOG_LEVEL } = process.env;
 const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
@@ -65,6 +66,7 @@ const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
       schema,
       execute,
       subscribe,
+      onConnect: subscriptionServerOnConnect,
     },
     { server, path: SUBSCRIPTIONS_PATH },
   );
