@@ -9,6 +9,7 @@ import {
   GraphQLInt,
 } from 'graphql';
 
+import User from '../users/models';
 import { pageInfoType } from '../../common/types';
 import commentType from '../comment/types';
 import { userType } from '../users/types';
@@ -25,6 +26,7 @@ export const postType = new GraphQLObjectType({
     author: {
       type: new GraphQLNonNull(userType),
       description: 'The author of the post.',
+      resolve: post => User.findOne({ _id: post.author }),
     },
     title: {
       type: new GraphQLNonNull(GraphQLString),

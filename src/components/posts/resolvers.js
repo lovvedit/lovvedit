@@ -40,7 +40,7 @@ export async function resolveToggleLikePost(root, { id: postId }, { user }) {
 
 export async function resolvePosts(root, { first = 10, after }) {
   const pagination = after ? { _id: { $gt: after } } : null;
-  const posts = await Post.find({ ...pagination }).populate('author').limit(first);
+  const posts = await Post.find({ ...pagination }).limit(first);
   const edges = posts.map(post => ({ cursor: post.id, node: post }));
 
   return {
@@ -53,5 +53,5 @@ export async function resolvePosts(root, { first = 10, after }) {
 }
 
 export async function resolvePost(root, { id }) {
-  return Post.findOne({ _id: id }).populate('author');
+  return Post.findOne({ _id: id });
 }
