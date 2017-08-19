@@ -24,7 +24,7 @@
 
 ## Introduction
 
-lovvedit is a website to recommend others stuff (books, movies, tv shows, etc) you, well, *loved*.
+lovvedit is a website to recommend others stuff (books, movies, tv shows, etc) you, well, loved.
 So, for example, when you run out of shows to binge-watch, you can go here and read what other
 people enjoyed and maybe give those things a try.
 
@@ -65,7 +65,8 @@ docker-compose up
 ```
 
 Now the application should be listening on port 80.
-Go to `[http://localhost:44300/graphiql](http://localhost:44300/graphiql)` and check that you see the GraphiQL page.
+Go to [http://localhost:44300/graphiql](http://localhost:44300/graphiql) and check that
+you see the GraphiQL page.
 
 ## Testing
 
