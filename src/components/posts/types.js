@@ -11,8 +11,8 @@ import {
 
 import User from '../users/models';
 import { pageInfoType } from '../../common/types';
-import { commentsType } from '../comment/types';
-import { resolveComments } from '../comment/resolvers';
+import { commentsType } from '../comments/types';
+import { resolveComments } from '../comments/resolvers';
 import { userType } from '../users/types';
 import { resolveIsLiked } from '../../common/resolvers';
 
