@@ -3,7 +3,7 @@ import { graphqlKoa, graphiqlKoa } from 'graphql-server-koa';
 
 import schema from './schema';
 
-const { NODE_ENV, PORT } = process.env;
+const { NODE_ENV, HOST, PORT } = process.env;
 
 const router = new Router();
 
@@ -22,7 +22,7 @@ if (NODE_ENV === 'development') {
     GRAPHIQL_PATH,
     graphiqlKoa({
       endpointURL: GRAPHQL_PATH,
-      subscriptionsEndpoint: `ws://localhost:${PORT}${SUBSCRIPTIONS_PATH}`,
+      subscriptionsEndpoint: `ws://${HOST}:${PORT}${SUBSCRIPTIONS_PATH}`,
     }),
   );
 }
