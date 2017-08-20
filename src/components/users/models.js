@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt';
 import mongoose, { Schema } from 'mongoose';
 
+import Profile from '../profiles/models';
+
 const UserSchema = new Schema({
   username: {
     type: String,
@@ -46,11 +48,7 @@ UserSchema.pre('save', async function hashPasswordPreSave(next) {
 });
 
 /**
- * @description
  * Compares a plaintext password with the hashed one stored in the database.
- *
- * @param {string} password - The plaintext password to compare.
- * @returns {boolean}
  */
 UserSchema.methods.comparePassword = async function comparePassword(password) {
   const { password: hashedPassword } = await this.model('User')

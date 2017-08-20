@@ -1,12 +1,12 @@
 import { GraphQLString } from 'graphql';
 
 import { userType } from './types';
-import { resolveUser, resolveMe } from './resolvers';
+import { resolveUser } from './resolvers';
 
 export const me = {
   type: userType,
   description: 'Get the logged in user.',
-  resolve: resolveMe,
+  resolve: (root, args, { user }) => user,
 };
 
 export const user = {

@@ -2,8 +2,11 @@ import { GraphQLError } from 'graphql';
 import jwt from 'jsonwebtoken';
 
 import User from './models';
-import Post from '../posts/models';
+import { resolvePosts } from '../posts/resolvers';
 
+/**
+ * Returns a user by its id or username.
+ */
 export async function resolveUser(root, { id, username }) {
   if (!id && !username) {
     throw new GraphQLError('You must provide a user id or username.');
@@ -14,14 +17,27 @@ export async function resolveUser(root, { id, username }) {
   return User.findOne(key);
 }
 
-export function resolveMe(root, args, { user }) {
-  return user;
+/**
+ * Creates a new user.
+ */
+export function resolveCreateUser(root, { user }) {
+  return User.create(user);
 }
 
-export function resolveCreateUser(root, { user: { username, password } }) {
-  return User.create({ username, password });
+/**
+ * Updates the logged in user. Returns the updated user.
+ */
+export function resolveUpdateUser(root, { user: data }, { user }) {
+  if (!user) {
+    throw new GraphQLError('You must be logged in to update your user.');
+  }
+
+  return User.findByIdAndUpdate(user.id, { $set: data }, { new: true, runValidators: true });
 }
 
+/**
+ * Tries to log the user in.
+ */
 export async function resolveLogIn(root, { username, password }) {
   const user = await User.findOne({ username });
 
@@ -37,16 +53,12 @@ export async function resolveLogIn(root, { username, password }) {
   return jwt.sign(jwtPayload, JWT_SECRET, jwtOptions);
 }
 
-export async function resolveUserPosts(user, { first = 10, after }) {
-  const pagination = after ? { _id: { $gt: after } } : null;
-  const posts = await Post.find({ author: user.id, ...pagination }).limit(first);
-  const edges = posts.map(post => ({ cursor: post.id, node: post }));
-
-  return {
-    pageInfo: {
-      hasNextPage: false,
-      nasPreviousPage: false,
-    },
-    edges,
-  };
+/**
+ * Returns the posts of the user.
+ */
+export function resolveUserPosts(user, { filters: postFilters, sort, pagination }, ctx, info) {
+  const filters = { author: user.id, ...postFilters };
+  return resolvePosts(user, { filters, sort, pagination }, ctx, info);
 }
+
+export async function resolveUserMessages(user, {}) {}
