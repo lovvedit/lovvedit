@@ -1,8 +1,9 @@
-import { GraphQLNonNull, GraphQLInt, GraphQLString } from 'graphql';
+import { GraphQLString } from 'graphql';
 
-import { pageInfoType } from '../../common/types';
-import { postType, postsType } from './types';
-import { resolvePost, resolvePosts } from './resolvers';
+import Post from './models';
+import { paginationInputType } from '../../common/types';
+import { postType, postsType, postFiltersType } from './types';
+import { resolvePosts } from './resolvers';
 
 export const post = {
   type: postType,
@@ -10,20 +11,16 @@ export const post = {
   args: {
     id: { type: GraphQLString },
   },
-  resolve: resolvePost,
+  resolve: (root, { id }) => Post.findOne({ _id: id }),
 };
 
 export const posts = {
   type: postsType,
   description: 'The posts list connection.',
   args: {
-    first: { type: GraphQLInt },
-    after: { type: GraphQLString },
+    filters: { type: postFiltersType },
+    sort: { type: GraphQLString },
+    pagination: { type: paginationInputType },
   },
   resolve: resolvePosts,
-};
-
-export const pageInfo = {
-  type: new GraphQLNonNull(pageInfoType),
-  description: 'Pagination info.',
 };

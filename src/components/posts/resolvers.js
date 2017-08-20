@@ -38,9 +38,12 @@ export async function resolveToggleLikePost(root, { id: postId }, { user }) {
   return post.toggleLike(user.id);
 }
 
-export async function resolvePosts(root, { first = 10, after }) {
-  const pagination = after ? { _id: { $gt: after } } : null;
-  const posts = await Post.find({ ...pagination }).limit(first);
+export async function resolvePosts(
+  root,
+  { filters, sort = 'hot', pagination: { first = 10, after } = {} },
+) {
+  const paginationFilter = after ? { _id: { $gt: after } } : null;
+  const posts = await Post.find({ ...filters, ...paginationFilter }).limit(first).sort(sort);
   const edges = posts.map(post => ({ cursor: post.id, node: post }));
 
   return {
@@ -50,8 +53,4 @@ export async function resolvePosts(root, { first = 10, after }) {
     },
     edges,
   };
-}
-
-export async function resolvePost(root, { id }) {
-  return Post.findOne({ _id: id });
 }

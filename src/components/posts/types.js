@@ -11,7 +11,8 @@ import {
 
 import User from '../users/models';
 import { pageInfoType } from '../../common/types';
-import commentType from '../comment/types';
+import { commentsType } from '../comment/types';
+import { resolveComments } from '../comment/resolvers';
 import { userType } from '../users/types';
 import { resolveIsLiked } from '../../common/resolvers';
 
@@ -33,7 +34,7 @@ export const postType = new GraphQLObjectType({
       description: 'The title of the post.',
     },
     body: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       description: 'The body of the post.',
     },
     link: {
@@ -42,7 +43,7 @@ export const postType = new GraphQLObjectType({
     },
     likes: {
       type: GraphQLInt,
-      description: 'The like quantity of the post.',
+      description: 'The like count of the post.',
       resolve: post => post.getLikeCount(),
     },
     liked: {
@@ -51,13 +52,14 @@ export const postType = new GraphQLObjectType({
       resolve: resolveIsLiked,
     },
     comments: {
-      type: new GraphQLNonNull(new GraphQLList(commentType)),
+      type: commentsType,
       description: 'The comments of the post.',
+      resolve: resolveComments,
     },
   }),
 });
 
-const postEdge = new GraphQLObjectType({
+const postEdgeType = new GraphQLObjectType({
   name: 'PostEdge',
   fields: () => ({
     cursor: { type: new GraphQLNonNull(GraphQLString) },
@@ -74,7 +76,7 @@ export const postsType = new GraphQLObjectType({
       description: 'Pagination info.',
     },
     edges: {
-      type: new GraphQLList(postEdge),
+      type: new GraphQLList(postEdgeType),
     },
   }),
 });
@@ -86,5 +88,38 @@ export const postInputType = new GraphQLInputObjectType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'The title of the post',
     },
+    body: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The body of the post.',
+    },
+    link: {
+      type: GraphQLString,
+      description: 'The link where one can get the stuff the post is recommending.',
+    },
+  }),
+});
+
+export const postUpdateInputType = new GraphQLInputObjectType({
+  name: 'PostUpdateInput',
+  fields: () => ({
+    title: {
+      type: GraphQLString,
+      description: 'The title of the post',
+    },
+    body: {
+      type: GraphQLString,
+      description: 'The body of the post.',
+    },
+    link: {
+      type: GraphQLString,
+      description: 'The link where one can get the stuff the post is recommending.',
+    },
+  }),
+});
+
+export const postFiltersType = new GraphQLInputObjectType({
+  name: 'PostFilters',
+  fields: () => ({
+    category: { type: GraphQLString },
   }),
 });
