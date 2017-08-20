@@ -1,7 +1,9 @@
 import mongoose, { Schema } from 'mongoose';
 
+import Like from '../likes/models';
+
 const CommentSchema = new Schema({
-  title: {
+  body: {
     type: String,
     required: true,
     trim: true,
@@ -26,8 +28,13 @@ const CommentSchema = new Schema({
   },
 });
 
-CommentSchema.virtual('score').get(function getCommentScore() {
-  return this.upVotes - this.downVotes;
-});
+CommentSchema.methods.getLikeCount = function getLikeCount() {
+  return Like.where({ target: this.id }).count();
+};
+
+CommentSchema.methods.toggleLike = async function toggleLike(userId) {
+  await Like.toggle(this.id, userId);
+  return this;
+};
 
 export default mongoose.model('Comment', CommentSchema);
