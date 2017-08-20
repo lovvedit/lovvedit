@@ -10,6 +10,7 @@ import { createServer } from 'http';
 
 import Koa from 'koa';
 import cors from 'kcors';
+import helmet from 'koa-helmet';
 import bodyParser from 'koa-bodyparser';
 import koaLogger from 'koa-logger';
 import logger from 'winston';
@@ -44,6 +45,7 @@ const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
   app
     .use(koaLogger())
     .use(bodyParser())
+    .use(helmet())
     .use(passport.initialize())
     .use((ctx, next) =>
       passport.authenticate('jwt', { session: false }, (err, user) => {
