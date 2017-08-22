@@ -9,8 +9,13 @@ const CommentSchema = new Schema({
     trim: true,
     maxlength: 1024,
   },
-  parent: {
+  parentComment: {
     type: Schema.Types.ObjectId,
+    ref: 'Comment',
+  },
+  post: {
+    type: Schema.Types.ObjectId,
+    ref: 'Post',
     required: true,
   },
   author: {
