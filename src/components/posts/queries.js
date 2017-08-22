@@ -3,7 +3,7 @@ import { GraphQLString } from 'graphql';
 import Post from './models';
 import { paginationInputType } from '../../common/types';
 import { postType, postsType, postFiltersType } from './types';
-import { resolvePosts } from './resolvers';
+import { connectionResolver } from '../../utils';
 
 export const post = {
   type: postType,
@@ -22,5 +22,5 @@ export const posts = {
     sort: { type: GraphQLString },
     pagination: { type: paginationInputType },
   },
-  resolve: resolvePosts,
+  resolve: connectionResolver(Post),
 };

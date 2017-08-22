@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-import Like from '../likes/models';
+import { getLikeCount, toggleLike, getCommentCount } from '../../utils';
 
 const CommentSchema = new Schema({
   body: {
@@ -28,13 +28,8 @@ const CommentSchema = new Schema({
   },
 });
 
-CommentSchema.methods.getLikeCount = function getLikeCount() {
-  return Like.where({ target: this.id }).count();
-};
-
-CommentSchema.methods.toggleLike = async function toggleLike(userId) {
-  await Like.toggle(this.id, userId);
-  return this;
-};
+CommentSchema.methods.getLikeCount = getLikeCount;
+CommentSchema.methods.getCommentCount = getCommentCount;
+CommentSchema.methods.toggleLike = toggleLike;
 
 export default mongoose.model('Comment', CommentSchema);

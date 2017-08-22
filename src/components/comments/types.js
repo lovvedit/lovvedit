@@ -8,10 +8,11 @@ import {
   GraphQLInt,
 } from 'graphql';
 
-import { resolveComments } from './resolvers';
+import Comment from './models';
 import { userType } from '../users/types';
-import { pageInfoType } from '../../common/types';
+import { pageInfoType, paginationInputType } from '../../common/types';
 import { resolveIsLiked } from '../../common/resolvers';
+import { connectionResolver } from '../../utils';
 
 export const commentType = new GraphQLObjectType({
   name: 'Comment',
@@ -40,10 +41,28 @@ export const commentType = new GraphQLObjectType({
       resolve: resolveIsLiked,
     },
     comments: {
-      type: new GraphQLNonNull(new GraphQLList(commentType)),
+      // eslint-disable-next-line no-use-before-define
+      type: commentsType,
       description: 'The comments of the comment.',
-      resolve: resolveComments,
+      args: {
+        sort: { type: GraphQLString },
+        pagination: { type: paginationInputType },
+      },
+      resolve: connectionResolver(Comment, { hasParent: true }),
     },
+    commentCount: {
+      type: new GraphQLNonNull(GraphQLInt),
+      description: 'The comment count of the comment.',
+      resolve: comment => comment.getCommentCount(),
+    },
+  }),
+});
+
+export const commentEdgeType = new GraphQLObjectType({
+  name: 'CommentEdge',
+  fields: () => ({
+    cursor: { type: new GraphQLNonNull(GraphQLString) },
+    node: { type: new GraphQLNonNull(commentType) },
   }),
 });
 
@@ -58,13 +77,5 @@ export const commentsType = new GraphQLObjectType({
     edges: {
       type: new GraphQLList(commentEdgeType),
     },
-  }),
-});
-
-export const commentEdgeType = new GraphQLObjectType({
-  name: 'CommentEdge',
-  fields: () => ({
-    cursor: { type: new GraphQLNonNull(GraphQLString) },
-    node: { type: new GraphQLNonNull(commentType) },
   }),
 });

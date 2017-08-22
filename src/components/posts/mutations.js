@@ -1,7 +1,13 @@
-import { GraphQLNonNull, GraphQLString } from 'graphql';
+import { GraphQLNonNull, GraphQLID } from 'graphql';
 
-import { postType, postInputType } from '../posts/types';
-import { resolveCreatePost, resolveUpdatePost, resolveToggleLikePost } from './resolvers';
+import { postType, postInputType } from './types';
+import {
+  resolveCreatePost,
+  resolveUpdatePost,
+  resolveRemovePost,
+  resolveToggleLikePost,
+} from './resolvers';
+import { loginRequired } from '../../utils';
 
 export const createPost = {
   name: 'createPost',
@@ -10,7 +16,7 @@ export const createPost = {
   args: {
     post: { type: new GraphQLNonNull(postInputType) },
   },
-  resolve: resolveCreatePost,
+  resolve: loginRequired(resolveCreatePost),
 };
 
 export const updatePost = {
@@ -18,10 +24,20 @@ export const updatePost = {
   description: 'Update a post.',
   type: postType,
   args: {
-    id: { type: new GraphQLNonNull(GraphQLString) },
+    id: { type: new GraphQLNonNull(GraphQLID) },
     post: { type: new GraphQLNonNull(postInputType) },
   },
-  resolve: resolveUpdatePost,
+  resolve: loginRequired(resolveUpdatePost),
+};
+
+export const removePost = {
+  name: 'removePost',
+  description: 'Remove a post',
+  type: postType,
+  args: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
+  },
+  resolve: loginRequired(resolveRemovePost),
 };
 
 export const toggleLikePost = {
@@ -29,7 +45,7 @@ export const toggleLikePost = {
   description: 'Toggle like.',
   type: postType,
   args: {
-    id: { type: new GraphQLNonNull(GraphQLString) },
+    id: { type: new GraphQLNonNull(GraphQLID) },
   },
-  resolve: resolveToggleLikePost,
+  resolve: loginRequired(resolveToggleLikePost),
 };

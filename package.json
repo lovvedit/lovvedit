@@ -10,6 +10,7 @@
     "prebuild": "yarn run clean",
     "build": "babel src -d build",
     "test": "jest",
+    "lint": "eslint src --fix",
     "precoverage": "yarn test",
     "coverage": "codecov",
     "precommit": "lint-staged",
@@ -67,9 +68,6 @@
     "collectCoverage": true
   },
   "lint-staged": {
-    "*.js": [
-      "prettier-eslint --write",
-      "git add"
-    ]
+    "*.js": ["prettier-eslint --write", "git add"]
   }
 }

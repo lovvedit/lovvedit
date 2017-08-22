@@ -1,6 +1,7 @@
 import {
   GraphQLObjectType,
   GraphQLInputObjectType,
+  GraphQLEnumType,
   GraphQLNonNull,
   GraphQLList,
   GraphQLBoolean,
@@ -10,12 +11,23 @@ import {
 } from 'graphql';
 
 import User from '../users/models';
-import { pageInfoType } from '../../common/types';
+import Comment from '../comments/models';
+import { pageInfoType, paginationInputType } from '../../common/types';
 import { commentsType } from '../comments/types';
-import { resolveComments } from '../comments/resolvers';
 import { userType } from '../users/types';
 import { resolveIsLiked } from '../../common/resolvers';
+import { connectionResolver } from '../../utils';
 
+export const categoryType = new GraphQLEnumType({
+  name: 'Category',
+  values: {
+    BOOK: { value: 'book' },
+    MOVIE: { value: 'movie' },
+    SHOW: { value: 'show' },
+    GAME: { value: 'game' },
+    SONG: { value: 'song' },
+  },
+});
 export const postType = new GraphQLObjectType({
   name: 'Post',
   description: 'A post recommending something.',
@@ -41,7 +53,7 @@ export const postType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'The link where one can get the stuff the post is recommending.',
     },
-    likes: {
+    likeCount: {
       type: GraphQLInt,
       description: 'The like count of the post.',
       resolve: post => post.getLikeCount(),
@@ -51,10 +63,31 @@ export const postType = new GraphQLObjectType({
       description: 'Is the post liked by the current user?',
       resolve: resolveIsLiked,
     },
+    category: {
+      type: new GraphQLNonNull(categoryType),
+      description: 'The category of the recommendation.',
+    },
+    genre: {
+      type: GraphQLString,
+      description: 'The genre of the recommendation.',
+    },
+    tags: {
+      type: new GraphQLNonNull(new GraphQLList(GraphQLString)),
+      description: 'The tags of the post.',
+    },
     comments: {
       type: commentsType,
       description: 'The comments of the post.',
-      resolve: resolveComments,
+      args: {
+        sort: { type: GraphQLString },
+        pagination: { type: paginationInputType },
+      },
+      resolve: connectionResolver(Comment, { hasParent: true }),
+    },
+    commentCount: {
+      type: new GraphQLNonNull(GraphQLInt),
+      description: 'The comment count of the post.',
+      resolve: post => post.getCommentCount(),
     },
   }),
 });
@@ -92,6 +125,18 @@ export const postInputType = new GraphQLInputObjectType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'The body of the post.',
     },
+    category: {
+      type: new GraphQLNonNull(categoryType),
+      description: 'The category of the recommendation.',
+    },
+    genre: {
+      type: GraphQLString,
+      description: 'The genre of the recommendation.',
+    },
+    tags: {
+      type: new GraphQLList(GraphQLString),
+      description: 'The tags of the post.',
+    },
     link: {
       type: GraphQLString,
       description: 'The link where one can get the stuff the post is recommending.',
@@ -110,6 +155,18 @@ export const postUpdateInputType = new GraphQLInputObjectType({
       type: GraphQLString,
       description: 'The body of the post.',
     },
+    category: {
+      type: categoryType,
+      description: 'The category of the recommendation.',
+    },
+    genre: {
+      type: GraphQLString,
+      description: 'The genre of the recommendation.',
+    },
+    tags: {
+      type: new GraphQLList(GraphQLString),
+      description: 'The tags of the post.',
+    },
     link: {
       type: GraphQLString,
       description: 'The link where one can get the stuff the post is recommending.',
@@ -120,6 +177,6 @@ export const postUpdateInputType = new GraphQLInputObjectType({
 export const postFiltersType = new GraphQLInputObjectType({
   name: 'PostFilters',
   fields: () => ({
-    category: { type: GraphQLString },
+    category: { type: categoryType },
   }),
 });

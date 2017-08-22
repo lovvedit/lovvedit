@@ -2,6 +2,7 @@ import { GraphQLNonNull, GraphQLString, GraphQLID } from 'graphql';
 
 import { commentType } from './types';
 import { resolveCreateComment, resolveUpdateComment, resolveToggleLikeComment } from './resolvers';
+import { loginRequired } from '../../utils';
 
 export const createComment = {
   name: 'createComment',
@@ -11,7 +12,7 @@ export const createComment = {
     parent: { type: new GraphQLNonNull(GraphQLID) },
     body: { type: new GraphQLNonNull(GraphQLString) },
   },
-  resolve: resolveCreateComment,
+  resolve: loginRequired(resolveCreateComment),
 };
 
 export const updateComment = {
@@ -21,7 +22,7 @@ export const updateComment = {
   args: {
     body: { type: new GraphQLNonNull(GraphQLString) },
   },
-  resolve: resolveUpdateComment,
+  resolve: loginRequired(resolveUpdateComment),
 };
 
 export const toggleLikeComment = {
@@ -29,7 +30,7 @@ export const toggleLikeComment = {
   description: 'Toggle like.',
   type: commentType,
   args: {
-    id: { type: new GraphQLNonNull(GraphQLString) },
+    id: { type: new GraphQLNonNull(GraphQLID) },
   },
-  resolve: resolveToggleLikeComment,
+  resolve: loginRequired(resolveToggleLikeComment),
 };

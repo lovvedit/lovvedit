@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-import Like from '../likes/models';
+import { getLikeCount, toggleLike, getCommentCount } from '../../utils';
 
 const PostSchema = new Schema({
   title: {
@@ -23,19 +23,28 @@ const PostSchema = new Schema({
     type: String,
     trim: true,
   },
+  category: {
+    type: String,
+    enum: ['book', 'movie', 'show', 'game', 'song'],
+    required: true,
+  },
+  genre: {
+    type: String,
+    trim: true,
+  },
+  tags: {
+    type: [String],
+    trim: true,
+    default: [],
+  },
   dateCreated: {
     type: Date,
     default: Date.now,
   },
 });
 
-PostSchema.methods.getLikeCount = function getLikeCount() {
-  return Like.where({ target: this.id }).count();
-};
-
-PostSchema.methods.toggleLike = async function toggleLike(userId) {
-  await Like.toggle(this.id, userId);
-  return this;
-};
+PostSchema.methods.getLikeCount = getLikeCount;
+PostSchema.methods.getCommentCount = getCommentCount;
+PostSchema.methods.toggleLike = toggleLike;
 
 export default mongoose.model('Post', PostSchema);

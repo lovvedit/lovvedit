@@ -7,6 +7,7 @@ services:
       - mongo
     environment:
       - NODE_ENV
+      - HOST
       - PORT
       - MONGO_NAME
       - MONGO_HOST
