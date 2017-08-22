@@ -1,5 +1,6 @@
 import {
   GraphQLObjectType,
+  GraphQLInputObjectType,
   GraphQLNonNull,
   GraphQLList,
   GraphQLID,
@@ -10,6 +11,7 @@ import {
 
 import Comment from './models';
 import { userType } from '../users/types';
+import { postType } from '../posts/types';
 import { pageInfoType, paginationInputType } from '../../common/types';
 import { resolveIsLiked } from '../../common/resolvers';
 import { connectionResolver } from '../../utils';
@@ -21,6 +23,10 @@ export const commentType = new GraphQLObjectType({
     id: {
       type: new GraphQLNonNull(GraphQLID),
       description: 'The id of the comment.',
+    },
+    post: {
+      type: new GraphQLNonNull(postType),
+      description: 'The post of the comment',
     },
     body: {
       type: new GraphQLNonNull(GraphQLString),
@@ -77,5 +83,21 @@ export const commentsType = new GraphQLObjectType({
     edges: {
       type: new GraphQLList(commentEdgeType),
     },
+  }),
+});
+
+export const commentInputType = new GraphQLInputObjectType({
+  name: 'CommentInput',
+  description: '',
+  fields: () => ({
+    body: { type: new GraphQLNonNull(GraphQLString) },
+  }),
+});
+
+export const commentUpdateInputType = new GraphQLInputObjectType({
+  name: 'CommentUpdateInput',
+  description: '',
+  fields: () => ({
+    body: { type: GraphQLString },
   }),
 });

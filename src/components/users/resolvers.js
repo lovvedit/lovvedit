@@ -28,10 +28,6 @@ export function resolveCreateUser(root, { user }) {
  * Updates the logged in user. Returns the updated user.
  */
 export function resolveUpdateUser(root, { user: data }, { user }) {
-  if (!user) {
-    throw new GraphQLError('You must be logged in to update your user.');
-  }
-
   return User.findByIdAndUpdate(user.id, { $set: data }, { new: true, runValidators: true });
 }
 
@@ -46,7 +42,6 @@ export async function resolveLogIn(root, { username, password }) {
   }
 
   const { JWT_SECRET } = process.env;
-
   const jwtPayload = { username: user.username };
   const jwtOptions = { expiresIn: '2 days', issuer: 'lovvedit', subject: user.id };
 

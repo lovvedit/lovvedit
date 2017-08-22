@@ -1,4 +1,4 @@
-import { GraphQLString } from 'graphql';
+import { GraphQLNonNull, GraphQLID, GraphQLString } from 'graphql';
 
 import Post from './models';
 import { paginationInputType } from '../../common/types';
@@ -9,7 +9,7 @@ export const post = {
   type: postType,
   description: 'Get a post by its id.',
   args: {
-    id: { type: GraphQLString },
+    id: { type: new GraphQLNonNull(GraphQLID) },
   },
   resolve: (root, { id }) => Post.findOne({ _id: id }),
 };

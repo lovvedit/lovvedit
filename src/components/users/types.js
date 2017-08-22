@@ -8,11 +8,13 @@ import {
 } from 'graphql';
 
 import Profile from '../profiles/models';
-import { resolveUserPosts, resolveUserMessages } from './resolvers';
+import Post from '../posts/models';
+import { resolveUserMessages } from './resolvers';
 import { paginationInputType } from '../../common/types';
 import { profileType } from '../profiles/types';
 import { postsType, postFiltersType } from '../posts/types';
 import { messagesType } from '../messages/types';
+import { connectionResolver } from '../../utils';
 
 export const userType = new GraphQLObjectType({
   name: 'User',
@@ -28,7 +30,7 @@ export const userType = new GraphQLObjectType({
         sort: { type: GraphQLString },
         pagination: { type: paginationInputType },
       },
-      resolve: resolveUserPosts,
+      resolve: connectionResolver(Post, { hasParent: true, parentField: 'author' }),
     },
     profile: {
       type: profileType,

@@ -2,6 +2,7 @@ import { GraphQLNonNull, GraphQLString } from 'graphql';
 
 import { userType, userInputType, userUpdateInputType } from './types';
 import { resolveCreateUser, resolveUpdateUser, resolveLogIn } from './resolvers';
+import { loginRequired } from '../../utils';
 
 export const createUser = {
   type: new GraphQLNonNull(userType),
@@ -18,7 +19,7 @@ export const updateUser = {
   args: {
     user: { type: new GraphQLNonNull(userUpdateInputType) },
   },
-  resolve: resolveUpdateUser,
+  resolve: loginRequired(resolveUpdateUser),
 };
 
 export const logIn = {

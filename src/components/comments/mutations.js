@@ -1,6 +1,6 @@
-import { GraphQLNonNull, GraphQLString, GraphQLID } from 'graphql';
+import { GraphQLNonNull, GraphQLID } from 'graphql';
 
-import { commentType } from './types';
+import { commentType, commentUpdateInputType, commentInputType } from './types';
 import { resolveCreateComment, resolveUpdateComment, resolveToggleLikeComment } from './resolvers';
 import { loginRequired } from '../../utils';
 
@@ -9,8 +9,9 @@ export const createComment = {
   description: 'Create a comment.',
   type: commentType,
   args: {
-    parent: { type: new GraphQLNonNull(GraphQLID) },
-    body: { type: new GraphQLNonNull(GraphQLString) },
+    post: { type: new GraphQLNonNull(GraphQLID) },
+    comment: { type: new GraphQLNonNull(commentInputType) },
+    parentComment: { type: GraphQLID },
   },
   resolve: loginRequired(resolveCreateComment),
 };
@@ -20,7 +21,8 @@ export const updateComment = {
   description: 'Update a comment.',
   type: commentType,
   args: {
-    body: { type: new GraphQLNonNull(GraphQLString) },
+    id: { type: new GraphQLNonNull(GraphQLID) },
+    comment: { type: new GraphQLNonNull(commentUpdateInputType) },
   },
   resolve: loginRequired(resolveUpdateComment),
 };
