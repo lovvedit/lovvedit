@@ -10,6 +10,7 @@ import {
 } from 'graphql';
 
 import Comment from './models';
+import Post from '../posts/models';
 import { userType } from '../users/types';
 import { postType } from '../posts/types';
 import { pageInfoType, paginationInputType } from '../../common/types';
@@ -27,6 +28,7 @@ export const commentType = new GraphQLObjectType({
     post: {
       type: new GraphQLNonNull(postType),
       description: 'The post of the comment',
+      resolve: ({ post }) => Post.findById(post),
     },
     body: {
       type: new GraphQLNonNull(GraphQLString),
@@ -54,12 +56,12 @@ export const commentType = new GraphQLObjectType({
         sort: { type: GraphQLString },
         pagination: { type: paginationInputType },
       },
-      resolve: connectionResolver(Comment, { hasParent: true }),
+      resolve: connectionResolver(Comment, { hasParent: true, parentField: 'parentComment' }),
     },
     commentCount: {
       type: new GraphQLNonNull(GraphQLInt),
       description: 'The comment count of the comment.',
-      resolve: comment => comment.getCommentCount(),
+      resolve: comment => comment.getCommentCount('parentComment'),
     },
   }),
 });

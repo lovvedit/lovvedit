@@ -1,7 +1,12 @@
 import { GraphQLNonNull, GraphQLID } from 'graphql';
 
 import { commentType, commentUpdateInputType, commentInputType } from './types';
-import { resolveCreateComment, resolveUpdateComment, resolveToggleLikeComment } from './resolvers';
+import {
+  resolveCreateComment,
+  resolveUpdateComment,
+  resolveRemoveComment,
+  resolveToggleLikeComment,
+} from './resolvers';
 import { loginRequired } from '../../utils';
 
 export const createComment = {
@@ -25,6 +30,16 @@ export const updateComment = {
     comment: { type: new GraphQLNonNull(commentUpdateInputType) },
   },
   resolve: loginRequired(resolveUpdateComment),
+};
+
+export const removeComment = {
+  name: 'removeComment',
+  description: 'Remove a comment.',
+  type: commentType,
+  args: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
+  },
+  resolve: loginRequired(resolveRemoveComment),
 };
 
 export const toggleLikeComment = {
