@@ -52,7 +52,7 @@ UserSchema.pre('save', async function hashPasswordPreSave(next) {
  */
 UserSchema.methods.comparePassword = async function comparePassword(password) {
   const { password: hashedPassword } = await this.model('User')
-    .findOne({ _id: this.id })
+    .findById(this.id)
     .select({ password: 1 });
 
   return bcrypt.compare(password, hashedPassword);

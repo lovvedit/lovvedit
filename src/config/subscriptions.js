@@ -14,7 +14,7 @@ export async function subscriptionServerOnConnect(connectionParams) {
 
   const { sub } = jwt.verify(connectionParams.authToken, JWT_SECRET);
 
-  const user = await User.findOne({ _id: sub });
+  const user = await User.findById(sub);
 
   return { user };
 }

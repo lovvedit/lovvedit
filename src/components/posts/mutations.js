@@ -1,6 +1,6 @@
 import { GraphQLNonNull, GraphQLID } from 'graphql';
 
-import { postType, postInputType } from './types';
+import { postType, postInputType, postUpdateInputType } from './types';
 import {
   resolveCreatePost,
   resolveUpdatePost,
@@ -25,7 +25,7 @@ export const updatePost = {
   type: postType,
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
-    post: { type: new GraphQLNonNull(postInputType) },
+    post: { type: new GraphQLNonNull(postUpdateInputType) },
   },
   resolve: loginRequired(resolveUpdatePost),
 };

@@ -39,7 +39,7 @@ export const postType = new GraphQLObjectType({
     author: {
       type: new GraphQLNonNull(userType),
       description: 'The author of the post.',
-      resolve: post => User.findOne({ _id: post.author }),
+      resolve: ({ author: authorId }) => User.findById(authorId),
     },
     title: {
       type: new GraphQLNonNull(GraphQLString),
@@ -82,7 +82,7 @@ export const postType = new GraphQLObjectType({
         sort: { type: GraphQLString },
         pagination: { type: paginationInputType },
       },
-      resolve: connectionResolver(Comment, { hasParent: true }),
+      resolve: connectionResolver(Comment, { hasParent: true, parentField: 'post' }),
     },
     commentCount: {
       type: new GraphQLNonNull(GraphQLInt),

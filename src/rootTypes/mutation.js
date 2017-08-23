@@ -8,7 +8,12 @@ import { GraphQLObjectType } from 'graphql';
 import { createUser, updateUser, logIn } from '../components/users/mutations';
 import updateProfile from '../components/profiles/mutations';
 import { createPost, updatePost, toggleLikePost } from '../components/posts/mutations';
-import { createComment, updateComment, toggleLikeComment } from '../components/comments/mutations';
+import {
+  createComment,
+  updateComment,
+  removeComment,
+  toggleLikeComment,
+} from '../components/comments/mutations';
 import sendMessage from '../components/messages/mutations';
 
 export default new GraphQLObjectType({
@@ -24,6 +29,7 @@ export default new GraphQLObjectType({
     toggleLikePost,
     createComment,
     updateComment,
+    removeComment,
     toggleLikeComment,
     sendMessage,
   }),

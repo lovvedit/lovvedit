@@ -11,7 +11,7 @@ export const post = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
   },
-  resolve: (root, { id }) => Post.findOne({ _id: id }),
+  resolve: (root, { id }) => Post.findById(id),
 };
 
 export const posts = {

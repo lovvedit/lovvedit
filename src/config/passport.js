@@ -13,7 +13,7 @@ export default function configurePassport(passport) {
   passport.use(
     new JwtStrategy(options, async ({ sub }, done) => {
       try {
-        const user = await User.findOne({ _id: sub });
+        const user = await User.findById(sub);
         done(null, user || null);
       } catch (err) {
         done(err);

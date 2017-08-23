@@ -21,8 +21,8 @@ export function getLikeCount() {
 /**
  * Returns the comment count of the document.
  */
-export function getCommentCount() {
-  return Comment.where({ parent: this.id }).count();
+export function getCommentCount(parentField = 'post') {
+  return Comment.where({ [parentField]: this.id }).count();
 }
 
 /**
@@ -41,7 +41,7 @@ export function loginRequired(resolver) {
 /**
  * A generic connection resolver following Relay's specification of pagination.
  */
-export function connectionResolver(model, { hasParent = false, parentField = 'parent' } = {}) {
+export function connectionResolver(model, { hasParent = false, parentField } = {}) {
   return async function resolveDocumets(
     parent,
     { filters, sort, pagination: { first = 10, after } = {} },
@@ -65,7 +65,7 @@ export function connectionResolver(model, { hasParent = false, parentField = 'pa
  * Tries to get a document, if it doesn't exist, throws.
  */
 export async function getDocumentOrThrow(model, id) {
-  const doc = await model.findOne({ _id: id });
+  const doc = await model.findById(id);
 
   if (!doc) {
     throw new GraphQLError(`The object with id ${id} does not exist.`);
