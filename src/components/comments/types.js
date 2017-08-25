@@ -38,7 +38,7 @@ export const commentType = new GraphQLObjectType({
       type: new GraphQLNonNull(userType),
       description: 'The author of the comment.',
     },
-    likes: {
+    likeCount: {
       type: GraphQLInt,
       description: 'The like count of the comment.',
       resolve: comment => comment.getLikeCount(),

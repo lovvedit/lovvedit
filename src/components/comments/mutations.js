@@ -14,9 +14,9 @@ export const createComment = {
   description: 'Create a comment.',
   type: commentType,
   args: {
-    post: { type: new GraphQLNonNull(GraphQLID) },
+    postId: { type: new GraphQLNonNull(GraphQLID) },
     comment: { type: new GraphQLNonNull(commentInputType) },
-    parentComment: { type: GraphQLID },
+    parentCommentId: { type: GraphQLID },
   },
   resolve: loginRequired(resolveCreateComment),
 };

@@ -6,7 +6,12 @@
 import { GraphQLObjectType } from 'graphql';
 
 import { postCreated, postUpdated, postLikeToggled } from '../components/posts/subscriptions';
-import { commentCreated } from '../components/comments/subscriptions';
+import {
+  commentCreated,
+  commentUpdated,
+  commentLikeToggled,
+  commentRemoved,
+} from '../components/comments/subscriptions';
 
 export default new GraphQLObjectType({
   name: 'Subscription',
@@ -16,5 +21,8 @@ export default new GraphQLObjectType({
     postUpdated,
     postLikeToggled,
     commentCreated,
+    commentUpdated,
+    commentLikeToggled,
+    commentRemoved,
   }),
 });

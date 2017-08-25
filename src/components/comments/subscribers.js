@@ -10,5 +10,15 @@ export const subscribeCommentCreated = withFilter(
 
 export const subscribeCommentUpdated = withFilter(
   () => pubsub.asyncIterator(topics.COMMENT_UPDATED),
-  ({ [topics.COMMENT_UPDATED]: comment }, { post: postId }) => comment.post.equals(postId),
+  ({ [topics.COMMENT_UPDATED]: comment }, { id: commentId }) => comment.id === commentId,
+);
+
+export const subscribeCommentLikeToggled = withFilter(
+  () => pubsub.asyncIterator(topics.COMMENT_LIKE_TOGGLED),
+  ({ [topics.COMMENT_LIKE_TOGGLED]: comment }, { id: commentId }) => comment.id === commentId,
+);
+
+export const subscribeCommentRemoved = withFilter(
+  () => pubsub.asyncIterator(topics.COMMENT_REMOVED),
+  ({ [topics.COMMENT_REMOVED]: comment }, { id: commentId }) => comment.id === commentId,
 );

@@ -5,7 +5,7 @@ import * as topics from '../../subscriptionTopics';
 
 export async function resolveCreateComment(
   root,
-  { post, parentComment = null, comment: { body } },
+  { postId: post, parentCommentId: parentComment = null, comment: { body } },
   { user: { id: userId } },
 ) {
   const comment = await Comment.create({ author: userId, post, parentComment, body });
@@ -13,19 +13,25 @@ export async function resolveCreateComment(
   return comment;
 }
 
-export async function resolveUpdateComment(root, { id: commentId, body }, { user }) {
+export async function resolveUpdateComment(root, { id: commentId, comment: data }, { user }) {
   const comment = await getDocumentOrThrow(Comment, commentId);
   checkUserIsAuthorOrThrow({ doc: comment, userId: user.id });
-  return Comment.findByIdAndUpdate(commentId, { $set: { body } }, { new: true });
+  const updatedComment = await Comment.findByIdAndUpdate(commentId, { $set: data }, { new: true });
+  pubsub.publish(topics.COMMENT_UPDATED, { [topics.COMMENT_UPDATED]: updatedComment });
+  return updatedComment;
 }
 
 export async function resolveRemoveComment(root, { id: commentId }, { user: { id: userId } }) {
   const comment = await getDocumentOrThrow(Comment, commentId);
   checkUserIsAuthorOrThrow({ doc: comment, userId });
-  return Comment.findByIdAndRemove(commentId);
+  const removedComment = await Comment.findByIdAndRemove(commentId);
+  pubsub.publish(topics.COMMENT_REMOVED, { [topics.COMMENT_REMOVED]: removedComment });
+  return removedComment;
 }
 
 export async function resolveToggleLikeComment(root, { id: commentId }, { user: { id: userId } }) {
   const comment = await getDocumentOrThrow(Comment, commentId);
-  return comment.toggleLike(userId);
+  await comment.toggleLike(userId);
+  pubsub.publish(topics.COMMENT_LIKE_TOGGLED, { [topics.COMMENT_LIKE_TOGGLED]: comment });
+  return comment;
 }
