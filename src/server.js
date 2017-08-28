@@ -46,6 +46,7 @@ const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
     .use(koaLogger())
     .use(bodyParser())
     .use(helmet())
+    .use(cors())
     .use(passport.initialize())
     .use((ctx, next) =>
       passport.authenticate('jwt', { session: false }, (err, user) => {
@@ -54,8 +55,7 @@ const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
       })(ctx),
     )
     .use(router.routes())
-    .use(router.allowedMethods())
-    .use(cors());
+    .use(router.allowedMethods());
 
   const server = createServer(app.callback());
 
