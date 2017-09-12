@@ -41,7 +41,7 @@
     "prettier": "1.6.1",
     "prettier-eslint": "8.0.0",
     "prettier-eslint-cli": "4.3.0",
-    "rimraf": "2.6.1"
+    "rimraf": "2.6.2"
   },
   "dependencies": {
     "bcrypt": "1.0.3",
