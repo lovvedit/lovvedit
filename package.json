@@ -59,7 +59,7 @@
     "mongoose": "4.11.11",
     "nodemailer": "4.1.0",
     "passport-jwt": "3.0.0",
-    "subscriptions-transport-ws": "0.8.2",
+    "subscriptions-transport-ws": "0.8.3",
     "validator": "8.2.0",
     "winston": "2.3.1"
   },
