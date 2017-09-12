@@ -5,24 +5,14 @@
 
 import { GraphQLObjectType } from 'graphql';
 
-import { postCreated, postUpdated, postLikeToggled } from '../components/posts/subscriptions';
-import {
-  commentCreated,
-  commentUpdated,
-  commentLikeToggled,
-  commentRemoved,
-} from '../components/comments/subscriptions';
+import { subscriptions as postsSubscriptions } from '../components/posts';
+import { subscriptions as commentsSubscriptions } from '../components/comments';
 
 export default new GraphQLObjectType({
   name: 'Subscription',
   description: 'The root subscription.',
   fields: () => ({
-    postCreated,
-    postUpdated,
-    postLikeToggled,
-    commentCreated,
-    commentUpdated,
-    commentLikeToggled,
-    commentRemoved,
+    ...postsSubscriptions,
+    ...commentsSubscriptions,
   }),
 });

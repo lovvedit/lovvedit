@@ -24,10 +24,12 @@ import configureMongo from './config/mongoose';
 import configurePassport from './config/passport';
 
 import schema from './schema';
-import router, { SUBSCRIPTIONS_PATH } from './router';
+import router, { GRAPHQL_PATH } from './router';
 import { subscriptionServerOnConnect } from './config/subscriptions';
 
-const { NODE_ENV, PORT, MONGO_HOST, MONGO_PORT, MONGO_NAME, LOG_LEVEL } = process.env;
+const {
+  NODE_ENV, PORT, MONGO_HOST, MONGO_PORT, MONGO_NAME, LOG_LEVEL,
+} = process.env;
 const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
 
 (async function main() {
@@ -52,8 +54,7 @@ const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
       passport.authenticate('jwt', { session: false }, (err, user) => {
         ctx.state.user = user || null;
         return next();
-      })(ctx),
-    )
+      })(ctx, next))
     .use(router.routes())
     .use(router.allowedMethods());
 
@@ -70,6 +71,6 @@ const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
       subscribe,
       onConnect: subscriptionServerOnConnect,
     },
-    { server, path: SUBSCRIPTIONS_PATH },
+    { server, path: GRAPHQL_PATH },
   );
 }());

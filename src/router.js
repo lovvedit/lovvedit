@@ -7,9 +7,8 @@ const { NODE_ENV, HOST, PORT } = process.env;
 
 const router = new Router();
 
-const GRAPHQL_PATH = '/graphql';
+export const GRAPHQL_PATH = '/graphql';
 const GRAPHIQL_PATH = '/graphiql';
-export const SUBSCRIPTIONS_PATH = '/subscriptions';
 
 export default router.all(
   GRAPHQL_PATH,
@@ -22,7 +21,7 @@ if (NODE_ENV === 'development') {
     GRAPHIQL_PATH,
     graphiqlKoa({
       endpointURL: GRAPHQL_PATH,
-      subscriptionsEndpoint: `ws://${HOST}:${PORT}${SUBSCRIPTIONS_PATH}`,
+      subscriptionsEndpoint: `ws://${HOST}:${PORT}${GRAPHQL_PATH}`,
     }),
   );
 }

@@ -2,6 +2,8 @@
   "plugins": [
     "dynamic-import-node",
     "transform-es2015-modules-commonjs",
+    "transform-export-extensions",
+    "syntax-export-extensions",
     "transform-object-rest-spread"
   ]
 }

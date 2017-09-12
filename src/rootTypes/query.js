@@ -5,16 +5,14 @@
 
 import { GraphQLObjectType } from 'graphql';
 
-import { post, posts } from '../components/posts/queries';
-import { me, user } from '../components/users/queries';
+import { queries as postsQueries } from '../components/posts';
+import { queries as usersQueries } from '../components/users';
 
 export default new GraphQLObjectType({
   name: 'Query',
   description: 'The root query.',
   fields: () => ({
-    me,
-    user,
-    post,
-    posts,
+    ...usersQueries,
+    ...postsQueries,
   }),
 });

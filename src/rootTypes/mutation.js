@@ -5,32 +5,20 @@
 
 import { GraphQLObjectType } from 'graphql';
 
-import { createUser, updateUser, logIn } from '../components/users/mutations';
+import { mutations as usersMutations } from '../components/users';
 import updateProfile from '../components/profiles/mutations';
-import { createPost, updatePost, toggleLikePost } from '../components/posts/mutations';
-import {
-  createComment,
-  updateComment,
-  removeComment,
-  toggleLikeComment,
-} from '../components/comments/mutations';
+import { mutations as postsMutations } from '../components/posts';
+import { mutations as commentsMutations } from '../components/comments';
 import sendMessage from '../components/messages/mutations';
 
 export default new GraphQLObjectType({
   name: 'Mutation',
   description: 'The root mutation.',
   fields: () => ({
-    logIn,
-    createUser,
-    updateUser,
+    ...usersMutations,
     updateProfile,
-    createPost,
-    updatePost,
-    toggleLikePost,
-    createComment,
-    updateComment,
-    removeComment,
-    toggleLikeComment,
+    ...postsMutations,
+    ...commentsMutations,
     sendMessage,
   }),
 });

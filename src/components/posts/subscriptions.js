@@ -7,13 +7,13 @@ import {
   subscribePostLikeToggled,
 } from './subscribers';
 import { resolveGenericSubscription } from '../../common/resolvers';
-import * as topics from '../../subscriptionTopics';
+import * as topics from './topics';
 
 export const postCreated = {
   name: 'postCreated',
   description: 'Subscribe to posts being created.',
   type: new GraphQLNonNull(postType),
-  resolve: resolveGenericSubscription(topics.POST_CREATED),
+  resolve: resolveGenericSubscription(topics.CREATED),
   subscribe: subscribePostCreated,
 };
 
@@ -24,7 +24,7 @@ export const postUpdated = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
   },
-  resolve: resolveGenericSubscription(topics.POST_UPDATED),
+  resolve: resolveGenericSubscription(topics.UPDATED),
   subscribe: subscribePostUpdated,
 };
 
@@ -35,6 +35,6 @@ export const postLikeToggled = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
   },
-  resolve: resolveGenericSubscription(topics.POST_LIKE_TOGGLED),
+  resolve: resolveGenericSubscription(topics.LIKE_TOGGLED),
   subscribe: subscribePostLikeToggled,
 };
