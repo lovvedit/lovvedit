@@ -20,6 +20,6 @@ services:
 
   # The main database
   mongo:
-    image: mongo:3.5.11
+    image: mongo:3.5.9
     volumes:
       - ./mongo_data:/data/db
