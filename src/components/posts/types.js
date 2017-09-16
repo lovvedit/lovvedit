@@ -12,7 +12,8 @@ import {
 
 import User from '../users/models';
 import Comment from '../comments/models';
-import { pageInfoType, paginationInputType } from '../../common/types';
+import { pageInfoType } from '../../common/types';
+import { paginationArgs } from '../../common/args';
 import { commentsType } from '../comments/types';
 import { userType } from '../users/types';
 import { resolveIsLiked } from '../../common/resolvers';
@@ -80,7 +81,7 @@ export const postType = new GraphQLObjectType({
       description: 'The comments of the post.',
       args: {
         sort: { type: GraphQLString },
-        pagination: { type: paginationInputType },
+        ...paginationArgs,
       },
       resolve: connectionResolver(Comment, { hasParent: true, parentField: 'post' }),
     },

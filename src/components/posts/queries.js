@@ -1,7 +1,7 @@
 import { GraphQLNonNull, GraphQLID, GraphQLString } from 'graphql';
 
 import Post from './models';
-import { paginationInputType } from '../../common/types';
+import { paginationArgs } from '../../common/args';
 import { postType, postsType, postFiltersType } from './types';
 import { connectionResolver } from '../../utils';
 
@@ -20,7 +20,7 @@ export const posts = {
   args: {
     filters: { type: postFiltersType },
     sort: { type: GraphQLString },
-    pagination: { type: paginationInputType },
+    ...paginationArgs,
   },
   resolve: connectionResolver(Post),
 };
