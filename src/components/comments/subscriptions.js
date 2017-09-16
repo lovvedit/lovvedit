@@ -8,7 +8,7 @@ import {
   subscribeCommentRemoved,
 } from './subscribers';
 import { resolveGenericSubscription } from '../../common/resolvers';
-import * as topics from '../../subscriptionTopics';
+import * as topics from './topics';
 
 export const commentCreated = {
   name: 'commentCreated',
@@ -17,7 +17,7 @@ export const commentCreated = {
   args: {
     postId: { type: new GraphQLNonNull(GraphQLID) },
   },
-  resolve: resolveGenericSubscription(topics.COMMENT_CREATED),
+  resolve: resolveGenericSubscription(topics.CREATED),
   subscribe: subscribeCommentCreated,
 };
 
@@ -28,7 +28,7 @@ export const commentUpdated = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
   },
-  resolve: resolveGenericSubscription(topics.COMMENT_UPDATED),
+  resolve: resolveGenericSubscription(topics.UPDATED),
   subscribe: subscribeCommentUpdated,
 };
 
@@ -39,7 +39,7 @@ export const commentLikeToggled = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
   },
-  resolve: resolveGenericSubscription(topics.COMMENT_LIKE_TOGGLED),
+  resolve: resolveGenericSubscription(topics.LIKE_TOGGLED),
   subscribe: subscribeCommentLikeToggled,
 };
 
@@ -50,6 +50,6 @@ export const commentRemoved = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
   },
-  resolve: resolveGenericSubscription(topics.COMMENT_REMOVED),
+  resolve: resolveGenericSubscription(topics.REMOVED),
   subscribe: subscribeCommentRemoved,
 };
