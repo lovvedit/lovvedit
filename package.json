@@ -41,7 +41,7 @@
     "lint-staged": "4.2.1",
     "nodemon": "1.12.1",
     "prettier": "1.7.0",
-    "prettier-eslint": "8.1.0",
+    "prettier-eslint": "8.1.1",
     "prettier-eslint-cli": "4.3.2",
     "rimraf": "2.6.2"
   },
