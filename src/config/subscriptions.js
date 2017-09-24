@@ -12,9 +12,13 @@ export async function subscriptionServerOnConnect(connectionParams) {
     return { user: null };
   }
 
-  const { sub } = jwt.verify(connectionParams.authToken, JWT_SECRET);
+  let token;
+  try {
+    token = jwt.verify(connectionParams.authToken, JWT_SECRET);
+  } catch (e) {
+    return { user: null };
+  }
 
-  const user = await User.findById(sub);
-
+  const user = await User.findById(token.sub);
   return { user };
 }
