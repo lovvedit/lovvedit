@@ -49,7 +49,7 @@
     "bcrypt": "1.0.3",
     "graphql": "0.11.4",
     "graphql-server-koa": "1.1.2",
-    "graphql-subscriptions": "0.5.1",
+    "graphql-subscriptions": "0.5.2",
     "jsonwebtoken": "8.0.1",
     "kcors": "2.2.1",
     "koa": "2.3.0",
