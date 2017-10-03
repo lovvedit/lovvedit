@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "bcrypt": "1.0.3",
-    "graphql": "0.11.6",
+    "graphql": "0.11.7",
     "graphql-server-koa": "1.1.2",
     "graphql-subscriptions": "0.5.3",
     "jsonwebtoken": "8.0.1",
