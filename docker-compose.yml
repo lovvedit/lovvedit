@@ -16,11 +16,11 @@ services:
     depends_on:
       - mongo
     environment:
-      # This env variables are necessary to let Nginx reverse proxy us.
+      # These env variables are necessary to let Nginx reverse proxy us.
       - VIRTUAL_HOST=api.lovvedit.com
       - VIRTUAL_PORT=44300
 
-      # This env variables will be read from the host machine.
+      # These env variables will be read from the host machine.
       - NODE_ENV
       - HOST
       - PORT
