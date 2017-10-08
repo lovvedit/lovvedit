@@ -38,6 +38,9 @@ services:
     image: mongo:3.5.9
     volumes:
       - mongo_data:/data/db
+    deploy:
+      placement:
+        constraints: [node.role == manager]
 
 volumes:
   mongo_data:

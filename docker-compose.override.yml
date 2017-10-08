@@ -13,8 +13,7 @@ services:
     environment:
       - VIRTUAL_HOST=api.localhost
       - VIRTUAL_PORT=44300
-    env_file:
-      - .env
+    env_file: .env
 
 volumes:
   node_modules:
