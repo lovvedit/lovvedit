@@ -9,6 +9,8 @@ build
 
 # Misc
 .env
+*.pyc
 .DS_Store
+.idea
 *.sw*
 *.log*

@@ -1,11 +1,19 @@
-#!/usr/bin/env bash
-#
-# Copies the env variables template file to the project root folder.
+#!/usr/bin/env python3
 
-readonly CURRENT_DIR="$(builtin cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-readonly PROJECT_ROOT_DIR="${CURRENT_DIR}/.."
+import os
+import shutil
 
-readonly ENV_TEMPLATE_FILE=".env.template"
-readonly ENV_FILE=".env"
 
-cp "${PROJECT_ROOT_DIR}/${ENV_TEMPLATE_FILE}" "${PROJECT_ROOT_DIR}/${ENV_FILE}"
+def main():
+    """Copies `.env.example` to `.env`."""
+
+    project_root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+
+    src = os.path.join(project_root, '.env.example')
+    dst = os.path.join(project_root, '.env')
+
+    shutil.copy2(src, dst)
+
+
+if __name__ == '__main__':
+    main()
