@@ -15,7 +15,7 @@ export default router.all(
   graphqlKoa(ctx => ({ schema, context: { user: ctx.state.user } })),
 );
 
-// We only want GraphiQL for development
+// We only want GraphiQL for development.
 if (NODE_ENV === 'development') {
   router.get(
     GRAPHIQL_PATH,

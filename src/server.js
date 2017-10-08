@@ -33,14 +33,14 @@ const {
 const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
 
 (async function main() {
-  // Configure Winston
+  // Configure Winston.
   configureWinston(logger, LOG_LEVEL);
 
-  // Configure MongoDB
+  // Configure MongoDB.
   mongoose.Promise = Promise;
   await configureMongo(mongoose, MONGO_URI);
 
-  // Configure Passport
+  // Configure Passport.
   configurePassport(passport);
 
   const app = new Koa();

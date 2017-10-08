@@ -7,9 +7,6 @@ coverage
 # Production
 build
 
-# Database data
-mongo_data
-
 # Misc
 .env
 .DS_Store

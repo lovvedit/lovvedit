@@ -1,11 +1,26 @@
-version: '3'
+version: '3.3'
 services:
-  # The Node.js API
+  # Nginx reverse proxy.
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    depends_on:
+      - node
+
+  # The Node.js API.
   node:
     build: .
     depends_on:
       - mongo
     environment:
+      # This env variables are necessary to let Nginx reverse proxy us.
+      - VIRTUAL_HOST=api.lovvedit.com
+      - VIRTUAL_PORT=44300
+
+      # This env variables will be read from the host machine.
       - NODE_ENV
       - HOST
       - PORT
@@ -18,8 +33,11 @@ services:
       - JWT_SECRET
       - LOG_LEVEL
 
-  # The main database
+  # The main database.
   mongo:
     image: mongo:3.5.9
     volumes:
-      - ./mongo_data:/data/db
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
