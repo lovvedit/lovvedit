@@ -65,8 +65,14 @@ docker-compose up
 ```
 
 Now the application should be listening on port 80.
-Go to [http://localhost:44300/graphiql](http://localhost:44300/graphiql) and check that
+Go to [http://api.localhost/graphiql](http://api.localhost/graphiql) and check that
 you see the GraphiQL page.
+
+### Installing Node dependencies on host system
+
+To make use of linters and other development tools, you must `yarn install`
+on your machine. Don't worry, the `node_modules` folder inside the container
+and the one in your machine won't cause any trouble.
 
 ## Testing
 
