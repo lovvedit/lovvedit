@@ -120,22 +120,22 @@ anymatch@^1.3.0:
     micromatch "^2.1.5"
     normalize-path "^2.0.0"
 
-apollo-server-core@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/apollo-server-core/-/apollo-server-core-1.1.3.tgz#1c1f223ab96097e095969a3494e6408cefdc9689"
+apollo-server-core@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/apollo-server-core/-/apollo-server-core-1.1.6.tgz#be45833e15a6fa28e52bc7e853cd77dfb2558da7"
   dependencies:
     apollo-tracing "^0.0.7"
 
-apollo-server-koa@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/apollo-server-koa/-/apollo-server-koa-1.1.3.tgz#c3e96081065bb59f9e942ab14df1135ef9d0fc4c"
+apollo-server-koa@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/apollo-server-koa/-/apollo-server-koa-1.1.6.tgz#2462b43e75d057c6dd1870f0f11103dfe9a6e809"
   dependencies:
-    apollo-server-core "^1.1.3"
-    apollo-server-module-graphiql "^1.1.3"
+    apollo-server-core "^1.1.6"
+    apollo-server-module-graphiql "^1.1.6"
 
-apollo-server-module-graphiql@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/apollo-server-module-graphiql/-/apollo-server-module-graphiql-1.1.3.tgz#cf59be3320fda301ef369660697486f172457abb"
+apollo-server-module-graphiql@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/apollo-server-module-graphiql/-/apollo-server-module-graphiql-1.1.6.tgz#9a0c8ff7ed7c4fff313065db388f08b1e7b6f9b9"
 
 apollo-tracing@^0.0.7:
   version "0.0.7"
@@ -1746,11 +1746,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.4:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
-graphql-server-koa@1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/graphql-server-koa/-/graphql-server-koa-1.1.3.tgz#47734b1ad30629935ab872eab2fe7f06afbc9191"
+graphql-server-koa@1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/graphql-server-koa/-/graphql-server-koa-1.1.6.tgz#c531e345470512d28e8b435fb244b3f6f7af3ce5"
   dependencies:
-    apollo-server-koa "^1.1.3"
+    apollo-server-koa "^1.1.6"
 
 graphql-subscriptions@0.5.4:
   version "0.5.4"
