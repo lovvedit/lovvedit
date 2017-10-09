@@ -9,7 +9,7 @@ services:
       - .:/usr/src/app
       # We want the `node_modules` inside the container to persist in a named volume
       # and to not be mounted over by the host's `node_modules`.
-      - node_modules:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
     environment:
       - VIRTUAL_HOST=api.localhost
       - VIRTUAL_PORT=44300
