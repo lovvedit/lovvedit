@@ -2,18 +2,17 @@ version: '3'
 services:
   node:
     command: yarn run start:dev
-    # We expose the API server directly (without being reverse-proxied) in dev just in case.
+    # We expose the API server directly (without being reverse-proxied)
+    # in dev just in case.
     ports:
       - "44300:44300"
     volumes:
       - .:/usr/src/app
-      # We want the `node_modules` inside the container to persist in a named volume
-      # and to not be mounted over by the host's `node_modules`.
-      - node_modules:/usr/src/app/node_modules
+      # We want the `node_modules` created in the image to persist
+      # in an unnamed volume and to not be mounted over by
+      # the host's `node_modules`.
+      - /usr/src/app/node_modules
     environment:
       - VIRTUAL_HOST=api.localhost
       - VIRTUAL_PORT=44300
     env_file: .env
-
-volumes:
-  node_modules:
