@@ -1,4 +1,4 @@
-FROM node:8.6.0@sha256:ea837dc6bbfec507cf84b84ad44a24cafd4806a0f5336d5ad727f86e4c0a9292
+FROM node:8.7.0
 
 LABEL name="lovvedit_api"
 LABEL version="1.0.0"
