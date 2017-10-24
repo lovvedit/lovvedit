@@ -63,7 +63,7 @@
     "passport-jwt": "3.0.0",
     "ramda": "0.25.0",
     "subscriptions-transport-ws": "0.9.1",
-    "validator": "9.0.0",
+    "validator": "9.1.0",
     "winston": "2.4.0"
   },
   "jest": {
