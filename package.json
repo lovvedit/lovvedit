@@ -60,7 +60,7 @@
     "koa-router": "7.2.1",
     "mongoose": "4.12.4",
     "nodemailer": "4.3.0",
-    "passport-jwt": "3.0.0",
+    "passport-jwt": "3.0.1",
     "ramda": "0.25.0",
     "subscriptions-transport-ws": "0.9.1",
     "validator": "9.1.1",
