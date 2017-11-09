@@ -850,8 +850,8 @@ codecov@3.0.0:
     urlgrey "0.4.4"
 
 color-convert@^1.9.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.0.tgz#1accf97dd739b983bf994d56fec8f95853641b7a"
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.1.tgz#c1261107aeb2f294ebffec9ed9ecad529a6097ed"
   dependencies:
     color-name "^1.1.1"
 
@@ -3192,9 +3192,9 @@ mongodb@2.2.33:
     mongodb-core "2.1.17"
     readable-stream "2.2.7"
 
-mongoose@4.13.0:
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.13.0.tgz#81bb266e045d66ac8dfdd84fc6749c873d7a6ac4"
+mongoose@4.13.1:
+  version "4.13.1"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.13.1.tgz#c9e203f0847bd5068b5210b0c09b48f847c9eb95"
   dependencies:
     async "2.1.4"
     bson "~1.0.4"
@@ -4740,8 +4740,8 @@ write@^0.2.1:
     mkdirp "^0.5.1"
 
 ws@^3.0.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-3.3.0.tgz#f8b948a1378af7efa702f5513da08dd516897c31"
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-3.3.1.tgz#d97e34dee06a1190c61ac1e95f43cb60b78cf939"
   dependencies:
     async-limiter "~1.0.0"
     safe-buffer "~5.1.0"
